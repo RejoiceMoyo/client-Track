@@ -36,13 +36,49 @@ export interface Service {
   id: number;
   name: string;
   description: string;
-  price: number;
-  duration: string;
+  basePrice: number;
+  baseDuration: string;
   category: string;
+}
+
+export interface Project {
+  id: number;
+  clientId: number;
+  clientName: string;
+  serviceId: number;
+  serviceName: string;
+  name: string;
+  description: string;
+  status: 'Active' | 'Completed' | 'On Hold' | 'Cancelled';
+  startDate: string;
+  endDate?: string;
+  negotiatedPrice: number;
+  negotiatedDuration: string;
+  paymentStructure: 'One-time' | 'Monthly' | 'Quarterly' | 'Yearly';
+  billingFrequency?: number; // in months, for recurring payments
+  totalValue: number;
+  progress: number;
+  notes?: string;
+}
+
+export interface Billing {
+  id: number;
+  projectId: number;
+  clientId: number;
+  clientName: string;
+  serviceName: string;
+  amount: number;
+  dueDate: string;
+  status: 'Pending' | 'Paid' | 'Overdue' | 'Cancelled';
+  billingType: 'Initial' | 'Recurring' | 'Final';
+  billingCycle?: number; // for recurring billing
+  notes?: string;
+  invoiceId?: number;
 }
 
 export interface Renewal {
   id: number;
+  projectId: number;
   clientId: number;
   clientName: string;
   serviceId: number;
@@ -55,6 +91,7 @@ export interface Renewal {
   notes?: string;
   lastRenewalDate?: string;
   nextRenewalDate: string;
+  billingFrequency: number; // in months
 }
 
 export type RenewalStatus = 'Upcoming' | 'Due' | 'Overdue' | 'Completed' | 'Cancelled';
@@ -137,28 +174,21 @@ export interface Invoice {
   services: Service[];
 }
 
-export interface Project {
-  id: number;
-  clientId: number;
-  clientName: string;
-  name: string;
-  description: string;
-  status: 'Active' | 'Completed' | 'On Hold' | 'Cancelled';
-  startDate: string;
-  endDate?: string;
-  budget: number;
-  progress: number;
-}
-
 export interface ProjectFormData {
   clientId: number;
+  serviceId: number;
   name: string;
   description: string;
   status: 'Active' | 'Completed' | 'On Hold' | 'Cancelled';
   startDate: string;
   endDate: string;
-  budget: number;
+  negotiatedPrice: number;
+  negotiatedDuration: string;
+  paymentStructure: 'One-time' | 'Monthly' | 'Quarterly' | 'Yearly';
+  billingFrequency: number;
+  totalValue: number;
   progress: number;
+  notes: string;
 }
 
 export interface ProjectModalProps {
