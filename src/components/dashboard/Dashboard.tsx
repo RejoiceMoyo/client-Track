@@ -1,72 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Users, Package, Calendar, TrendingUp, AlertTriangle, CheckCircle, DollarSign, Search, Filter, Plus, Eye, Edit, Trash2 } from 'lucide-react';
-
-// Mock data
-const mockRenewals = [
-  {
-    id: 1,
-    client: "Sophia Carter",
-    service: "Website Maintenance",
-    expiry: "2024-08-15",
-    status: "Expiring Soon",
-    amount: 299,
-    email: "sophia@example.com"
-  },
-  { 
-    id: 2,
-    client: "Ethan Zhang", 
-    service: "SEO Optimization", 
-    expiry: "2024-09-01", 
-    status: "Active",
-    amount: 499,
-    email: "ethan@example.com"
-  },
-  {
-    id: 3,
-    client: "Olivia Bennett",
-    service: "Social Media Management",
-    expiry: "2024-07-20",
-    status: "Expired",
-    amount: 199,
-    email: "olivia@example.com"
-  },
-  { 
-    id: 4,
-    client: "Liam Kim", 
-    service: "Content Creation", 
-    expiry: "2024-10-10", 
-    status: "Active",
-    amount: 399,
-    email: "liam@example.com"
-  },
-  {
-    id: 5,
-    client: "Ava Harris",
-    service: "Digital Marketing",
-    expiry: "2024-08-20",
-    status: "Expiring Soon",
-    amount: 599,
-    email: "ava@example.com"
-  },
-  {
-    id: 6,
-    client: "Noah Wilson",
-    service: "Brand Design",
-    expiry: "2024-11-05",
-    status: "Active",
-    amount: 799,
-    email: "noah@example.com"
-  }
-];
-
-// Mock stats data
-const stats = {
-  totalClients: 156,
-  activeServices: 89,
-  expiringSoon: 23,
-  revenueYTD: 45230,
-};
+import { 
+  dashboardStats, 
+  mockRenewals, 
+  mockClients, 
+  mockInvoices, 
+  getUpcomingRenewals, 
+  getOverdueRenewals,
+  getRecentInvoices,
+  getTopClientsByRevenue
+} from '../../data';
 
 export const Dashboard: React.FC = () => {
   const { user } = useAuth();
@@ -76,28 +20,37 @@ export const Dashboard: React.FC = () => {
   const [expiryFilter, setExpiryFilter] = useState('expiring-soon');
   const [showClientForm, setShowClientForm] = useState(false);
 
+  // Get dashboard data from mock data
+  const stats = dashboardStats;
+  const upcomingRenewals = getUpcomingRenewals(30);
+  const overdueRenewals = getOverdueRenewals();
+  const recentInvoices = getRecentInvoices(5);
+  const topClients = getTopClientsByRevenue(5);
+  
+  // Calculate additional stats
+  const expiringSoon = upcomingRenewals.length;
+  const activeServices = mockClients.reduce((sum, client) => sum + client.services, 0);
+
   // Filter renewals based on search and filters
   const filteredRenewals = useMemo(() => {
-    return mockRenewals.filter(renewal => {
-      const matchesSearch = renewal.client.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           renewal.service.toLowerCase().includes(searchTerm.toLowerCase());
+    return upcomingRenewals.filter(renewal => {
+      const matchesSearch = renewal.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           renewal.serviceName.toLowerCase().includes(searchTerm.toLowerCase());
       
       const matchesClientFilter = clientFilter === 'all-clients' || 
-                                 (clientFilter === 'individual' && renewal.client.split(' ').length === 2) ||
-                                 (clientFilter === 'business' && renewal.client.includes('Corp')) ||
-                                 (clientFilter === 'enterprise' && renewal.amount > 500);
+                                 (clientFilter === 'individual' && renewal.clientName.split(' ').length === 2) ||
+                                 (clientFilter === 'business' && renewal.renewalPrice < 1000) ||
+                                 (clientFilter === 'enterprise' && renewal.renewalPrice >= 1000);
       
       const matchesServiceFilter = serviceFilter === 'active-services' || 
-                                  renewal.service.toLowerCase().includes(serviceFilter.replace('-', ' '));
+                                  renewal.serviceName.toLowerCase().includes(serviceFilter);
       
       const matchesExpiryFilter = expiryFilter === 'expiring-soon' || 
-                                 (expiryFilter === '30-days' && renewal.status === 'Expiring Soon') ||
-                                 (expiryFilter === '60-days' && renewal.status === 'Active') ||
-                                 (expiryFilter === '90-days' && renewal.status === 'Active');
+                                 renewal.status.toLowerCase() === expiryFilter;
 
       return matchesSearch && matchesClientFilter && matchesServiceFilter && matchesExpiryFilter;
     });
-  }, [searchTerm, clientFilter, serviceFilter, expiryFilter]);
+  }, [searchTerm, clientFilter, serviceFilter, expiryFilter, upcomingRenewals]);
 
   const handleAddClient = () => {
     setShowClientForm(true);
@@ -161,7 +114,7 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Active Services</p>
-                <p className="text-3xl font-bold text-gray-900">{stats.activeServices}</p>
+                <p className="text-3xl font-bold text-gray-900">{activeServices}</p>
                 
               </div>
              
@@ -175,7 +128,7 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Expiring Soon</p>
-                <p className="text-3xl font-bold text-gray-900">{stats.expiringSoon}</p>
+                <p className="text-3xl font-bold text-gray-900">{expiringSoon}</p>
                
               </div>
              
@@ -189,7 +142,7 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Revenue YTD</p>
-                <p className="text-3xl font-bold text-gray-900">${stats.revenueYTD.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-gray-900">${stats.totalRevenue.toLocaleString()}</p>
               
               </div>
              
@@ -233,10 +186,10 @@ export const Dashboard: React.FC = () => {
                 className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="active-services">All Services</option>
-                <option value="consulting">Consulting</option>
                 <option value="development">Development</option>
                 <option value="marketing">Marketing</option>
                 <option value="design">Design</option>
+                <option value="content">Content</option>
               </select>
 
               <select 
@@ -245,9 +198,10 @@ export const Dashboard: React.FC = () => {
                 className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="expiring-soon">All Status</option>
-                <option value="30-days">Expiring Soon</option>
-                <option value="60-days">Active</option>
-                <option value="90-days">Expired</option>
+                <option value="upcoming">Upcoming</option>
+                <option value="due">Due</option>
+                <option value="overdue">Overdue</option>
+                <option value="completed">Completed</option>
               </select>
             </div>
           </div>
@@ -279,20 +233,23 @@ export const Dashboard: React.FC = () => {
                   <tr key={renewal.id} className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
                     <td className="py-4 px-6">
                       <div>
-                        <div className="text-sm font-medium text-gray-900">{renewal.client}</div>
-                        <div className="text-sm text-gray-500">{renewal.email}</div>
+                        <div className="text-sm font-medium text-gray-900">{renewal.clientName}</div>
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-sm text-blue-600 font-medium">{renewal.service}</td>
-                    <td className="py-4 px-6 text-sm text-gray-900">${renewal.amount}</td>
-                    <td className="py-4 px-6 text-sm text-gray-500">{renewal.expiry}</td>
+                    <td className="py-4 px-6 text-sm text-blue-600 font-medium">{renewal.serviceName}</td>
+                    <td className="py-4 px-6 text-sm text-gray-900">${renewal.renewalPrice}</td>
+                    <td className="py-4 px-6 text-sm text-gray-500">{renewal.renewalDate}</td>
                     <td className="py-4 px-6">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        renewal.status === "Expired"
+                        renewal.status === "Overdue"
                           ? "bg-red-100 text-red-800"
-                          : renewal.status === "Expiring Soon"
+                          : renewal.status === "Due"
                             ? "bg-orange-100 text-orange-800"
-                            : "bg-green-100 text-green-800"
+                            : renewal.status === "Upcoming"
+                              ? "bg-blue-100 text-blue-800"
+                              : renewal.status === "Completed"
+                                ? "bg-green-100 text-green-800"
+                                : "bg-gray-100 text-gray-800"
                       }`}>
                         {renewal.status}
                       </span>
