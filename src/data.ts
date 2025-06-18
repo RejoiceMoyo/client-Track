@@ -4,10 +4,10 @@ import type { Client, Service, Invoice, Project, Contact, DashboardStats, Renewa
 export const mockClients: Client[] = [
   {
     id: 1,
-    name: "Sophia Carter",
-    email: "sophia@example.com",
-    phone: "+1 (555) 123-4567",
-    company: "Tech Solutions Inc.",
+    name: "Tendai Moyo",
+    email: "tendai@hararetech.co.zw",
+    phone: "+263 77 123 4567",
+    company: "Harare Tech Solutions",
     type: "Business",
     status: "Active",
     services: 3,
@@ -16,10 +16,10 @@ export const mockClients: Client[] = [
   },
   {
     id: 2,
-    name: "Ethan Zhang",
-    email: "ethan@example.com",
-    phone: "+1 (555) 234-5678",
-    company: "Digital Marketing Pro",
+    name: "Farai Chikomba",
+    email: "farai@bulawayodigital.zw",
+    phone: "+263 71 234 5678",
+    company: "Bulawayo Digital Marketing",
     type: "Business",
     status: "Active",
     services: 2,
@@ -28,10 +28,10 @@ export const mockClients: Client[] = [
   },
   {
     id: 3,
-    name: "Olivia Bennett",
-    email: "olivia@example.com",
-    phone: "+1 (555) 345-6789",
-    company: "Creative Design Studio",
+    name: "Rutendo Ndlovu",
+    email: "rutendo@creativezimbabwe.zw",
+    phone: "+263 78 345 6789",
+    company: "Creative Zimbabwe Studio",
     type: "Business",
     status: "Inactive",
     services: 1,
@@ -40,10 +40,10 @@ export const mockClients: Client[] = [
   },
   {
     id: 4,
-    name: "Liam Kim",
-    email: "liam@example.com",
-    phone: "+1 (555) 456-7890",
-    company: "Startup Ventures",
+    name: "Tatenda Mutasa",
+    email: "tatenda@startupzimbabwe.zw",
+    phone: "+263 73 456 7890",
+    company: "Startup Zimbabwe Ventures",
     type: "Enterprise",
     status: "Active",
     services: 5,
@@ -52,10 +52,10 @@ export const mockClients: Client[] = [
   },
   {
     id: 5,
-    name: "Ava Harris",
-    email: "ava@example.com",
-    phone: "+1 (555) 567-8901",
-    company: "Consulting Group",
+    name: "Chiedza Marufu",
+    email: "chiedza@consultingzimbabwe.zw",
+    phone: "+263 77 567 8901",
+    company: "Zimbabwe Consulting Group",
     type: "Enterprise",
     status: "Active",
     services: 4,
@@ -64,10 +64,10 @@ export const mockClients: Client[] = [
   },
   {
     id: 6,
-    name: "Noah Wilson",
-    email: "noah@example.com",
-    phone: "+1 (555) 678-9012",
-    company: "Freelance Designer",
+    name: "Tafadzwa Sibanda",
+    email: "tafadzwa@freelance.zw",
+    phone: "+263 71 678 9012",
+    company: "Freelance Designer Zimbabwe",
     type: "Individual",
     status: "Prospect",
     services: 0,
@@ -76,10 +76,10 @@ export const mockClients: Client[] = [
   },
   {
     id: 7,
-    name: "Emma Davis",
-    email: "emma@example.com",
-    phone: "+1 (555) 789-0123",
-    company: "Marketing Agency",
+    name: "Rumbidzai Gumbo",
+    email: "rumbidzai@marketingzimbabwe.zw",
+    phone: "+263 78 789 0123",
+    company: "Zimbabwe Marketing Agency",
     type: "Business",
     status: "Active",
     services: 2,
@@ -88,10 +88,10 @@ export const mockClients: Client[] = [
   },
   {
     id: 8,
-    name: "William Brown",
-    email: "william@example.com",
-    phone: "+1 (555) 890-1234",
-    company: "E-commerce Store",
+    name: "Kudzai Mupfumira",
+    email: "kudzai@ecommercezimbabwe.zw",
+    phone: "+263 73 890 1234",
+    company: "Zimbabwe E-commerce Store",
     type: "Business",
     status: "Active",
     services: 3,
@@ -100,54 +100,54 @@ export const mockClients: Client[] = [
   }
 ];
 
-// Mock data for services
+// Mock data for services (what we offer)
 export const mockServices: Service[] = [
   {
     id: 1,
     name: "Website Development",
     description: "Custom website development with modern technologies",
-    price: 999,
-    duration: "2-4 weeks",
+    basePrice: 999,
+    baseDuration: "2-4 weeks",
     category: "Development"
   },
   {
     id: 2,
     name: "SEO Optimization",
     description: "Search engine optimization for better rankings",
-    price: 499,
-    duration: "1-2 weeks",
+    basePrice: 499,
+    baseDuration: "1-2 weeks",
     category: "Marketing"
   },
   {
     id: 3,
     name: "Logo Design",
     description: "Professional logo design and branding",
-    price: 299,
-    duration: "1 week",
+    basePrice: 299,
+    baseDuration: "1 week",
     category: "Design"
   },
   {
     id: 4,
     name: "Social Media Management",
     description: "Monthly social media content and management",
-    price: 399,
-    duration: "Ongoing",
+    basePrice: 399,
+    baseDuration: "Ongoing",
     category: "Marketing"
   },
   {
     id: 5,
     name: "Mobile App Development",
     description: "Cross-platform mobile application development",
-    price: 2499,
-    duration: "6-8 weeks",
+    basePrice: 2499,
+    baseDuration: "6-8 weeks",
     category: "Development"
   },
   {
     id: 6,
     name: "Content Writing",
     description: "Professional content writing for websites and blogs",
-    price: 199,
-    duration: "3-5 days",
+    basePrice: 199,
+    baseDuration: "3-5 days",
     category: "Content"
   }
 ];
@@ -157,7 +157,7 @@ export const mockInvoices: Invoice[] = [
   {
     id: 1,
     clientId: 1,
-    clientName: "Sophia Carter",
+    clientName: "Tendai Moyo",
     amount: 999,
     status: "Paid",
     dueDate: "2024-01-20",
@@ -167,7 +167,7 @@ export const mockInvoices: Invoice[] = [
   {
     id: 2,
     clientId: 2,
-    clientName: "Ethan Zhang",
+    clientName: "Farai Chikomba",
     amount: 499,
     status: "Pending",
     dueDate: "2024-01-25",
@@ -177,7 +177,7 @@ export const mockInvoices: Invoice[] = [
   {
     id: 3,
     clientId: 4,
-    clientName: "Liam Kim",
+    clientName: "Tatenda Mutasa",
     amount: 2499,
     status: "Overdue",
     dueDate: "2024-01-15",
@@ -187,7 +187,7 @@ export const mockInvoices: Invoice[] = [
   {
     id: 4,
     clientId: 5,
-    clientName: "Ava Harris",
+    clientName: "Chiedza Marufu",
     amount: 399,
     status: "Paid",
     dueDate: "2024-01-30",
@@ -197,7 +197,7 @@ export const mockInvoices: Invoice[] = [
   {
     id: 5,
     clientId: 7,
-    clientName: "Emma Davis",
+    clientName: "Rumbidzai Gumbo",
     amount: 598,
     status: "Pending",
     dueDate: "2024-02-05",
@@ -211,7 +211,7 @@ export const mockProjects: Project[] = [
   {
     id: 1,
     clientId: 1,
-    clientName: "Sophia Carter",
+    clientName: "Tendai Moyo",
     name: "E-commerce Website Redesign",
     description: "Complete redesign of the existing e-commerce platform",
     status: "Active",
@@ -222,7 +222,7 @@ export const mockProjects: Project[] = [
   {
     id: 2,
     clientId: 4,
-    clientName: "Liam Kim",
+    clientName: "Tatenda Mutasa",
     name: "Mobile App Development",
     description: "Cross-platform mobile app for startup",
     status: "Active",
@@ -233,7 +233,7 @@ export const mockProjects: Project[] = [
   {
     id: 3,
     clientId: 5,
-    clientName: "Ava Harris",
+    clientName: "Chiedza Marufu",
     name: "Brand Identity Design",
     description: "Complete brand identity including logo and guidelines",
     status: "Completed",
@@ -245,7 +245,7 @@ export const mockProjects: Project[] = [
   {
     id: 4,
     clientId: 2,
-    clientName: "Ethan Zhang",
+    clientName: "Farai Chikomba",
     name: "SEO Campaign",
     description: "6-month SEO optimization campaign",
     status: "Active",
@@ -256,7 +256,7 @@ export const mockProjects: Project[] = [
   {
     id: 5,
     clientId: 8,
-    clientName: "William Brown",
+    clientName: "Kudzai Mupfumira",
     name: "Website Maintenance",
     description: "Ongoing website maintenance and updates",
     status: "On Hold",
@@ -331,121 +331,270 @@ export const mockRenewals: Renewal[] = [
   {
     id: 1,
     clientId: 1,
-    clientName: "Sophia Carter",
+    clientName: "Tendai Moyo",
     serviceId: 1,
     serviceName: "Website Development",
     currentPrice: 999,
     renewalPrice: 1099,
-    renewalDate: "2024-02-15",
+    renewalDate: "2025-07-15",
     status: "Upcoming",
     autoRenew: true,
     notes: "Client requested additional features for renewal",
-    lastRenewalDate: "2023-02-15",
-    nextRenewalDate: "2025-02-15"
+    lastRenewalDate: "2024-07-15",
+    nextRenewalDate: "2026-07-15"
   },
   {
     id: 2,
     clientId: 2,
-    clientName: "Ethan Zhang",
+    clientName: "Farai Chikomba",
     serviceId: 2,
     serviceName: "SEO Optimization",
     currentPrice: 499,
     renewalPrice: 549,
-    renewalDate: "2024-01-25",
+    renewalDate: "2025-06-25",
     status: "Due",
     autoRenew: false,
     notes: "Client considering upgrading to premium package",
-    lastRenewalDate: "2023-01-25",
-    nextRenewalDate: "2025-01-25"
+    lastRenewalDate: "2024-06-25",
+    nextRenewalDate: "2026-06-25"
   },
   {
     id: 3,
     clientId: 4,
-    clientName: "Liam Kim",
+    clientName: "Tatenda Mutasa",
     serviceId: 5,
     serviceName: "Mobile App Development",
     currentPrice: 2499,
     renewalPrice: 2749,
-    renewalDate: "2024-01-10",
+    renewalDate: "2025-06-10",
     status: "Overdue",
     autoRenew: true,
     notes: "Payment reminder sent, awaiting response",
-    lastRenewalDate: "2023-01-10",
-    nextRenewalDate: "2025-01-10"
+    lastRenewalDate: "2024-06-10",
+    nextRenewalDate: "2026-06-10"
   },
   {
     id: 4,
     clientId: 5,
-    clientName: "Ava Harris",
+    clientName: "Chiedza Marufu",
     serviceId: 4,
     serviceName: "Social Media Management",
     currentPrice: 399,
     renewalPrice: 399,
-    renewalDate: "2024-01-30",
+    renewalDate: "2025-06-30",
     status: "Completed",
     autoRenew: true,
     notes: "Successfully renewed for another year",
-    lastRenewalDate: "2024-01-30",
-    nextRenewalDate: "2025-01-30"
+    lastRenewalDate: "2025-06-30",
+    nextRenewalDate: "2026-06-30"
   },
   {
     id: 5,
     clientId: 7,
-    clientName: "Emma Davis",
+    clientName: "Rumbidzai Gumbo",
     serviceId: 2,
     serviceName: "SEO Optimization",
     currentPrice: 499,
     renewalPrice: 499,
-    renewalDate: "2024-02-05",
+    renewalDate: "2025-07-05",
     status: "Upcoming",
     autoRenew: true,
     notes: "Standard renewal, no changes requested",
-    lastRenewalDate: "2023-02-05",
-    nextRenewalDate: "2025-02-05"
+    lastRenewalDate: "2024-07-05",
+    nextRenewalDate: "2026-07-05"
   },
   {
     id: 6,
     clientId: 8,
-    clientName: "William Brown",
+    clientName: "Kudzai Mupfumira",
     serviceId: 1,
     serviceName: "Website Development",
     currentPrice: 999,
     renewalPrice: 0,
-    renewalDate: "2024-01-20",
+    renewalDate: "2025-06-20",
     status: "Cancelled",
     autoRenew: false,
     notes: "Client decided to discontinue service",
-    lastRenewalDate: "2023-01-20",
-    nextRenewalDate: "2024-01-20"
+    lastRenewalDate: "2024-06-20",
+    nextRenewalDate: "2025-06-20"
   },
   {
     id: 7,
     clientId: 1,
-    clientName: "Sophia Carter",
+    clientName: "Tendai Moyo",
     serviceId: 3,
     serviceName: "Logo Design",
     currentPrice: 299,
     renewalPrice: 299,
-    renewalDate: "2024-03-01",
+    renewalDate: "2025-08-01",
     status: "Upcoming",
     autoRenew: false,
     notes: "One-time service, no renewal needed",
-    nextRenewalDate: "2024-03-01"
+    nextRenewalDate: "2025-08-01"
   },
   {
     id: 8,
     clientId: 4,
-    clientName: "Liam Kim",
+    clientName: "Tatenda Mutasa",
     serviceId: 4,
     serviceName: "Social Media Management",
     currentPrice: 399,
     renewalPrice: 449,
-    renewalDate: "2024-02-20",
+    renewalDate: "2025-07-20",
     status: "Due",
     autoRenew: true,
     notes: "Price increase due to expanded service scope",
-    lastRenewalDate: "2023-02-20",
-    nextRenewalDate: "2025-02-20"
+    lastRenewalDate: "2024-07-20",
+    nextRenewalDate: "2026-07-20"
+  },
+  {
+    id: 9,
+    clientId: 2,
+    clientName: "Farai Chikomba",
+    serviceId: 4,
+    serviceName: "Social Media Management",
+    currentPrice: 399,
+    renewalPrice: 399,
+    renewalDate: "2025-07-28",
+    status: "Upcoming",
+    autoRenew: true,
+    notes: "Standard renewal, client satisfied with current service",
+    lastRenewalDate: "2024-07-28",
+    nextRenewalDate: "2026-07-28"
+  },
+  {
+    id: 10,
+    clientId: 5,
+    clientName: "Chiedza Marufu",
+    serviceId: 1,
+    serviceName: "Website Development",
+    currentPrice: 999,
+    renewalPrice: 1099,
+    renewalDate: "2025-08-05",
+    status: "Upcoming",
+    autoRenew: false,
+    notes: "Client requested website redesign for renewal",
+    lastRenewalDate: "2024-08-05",
+    nextRenewalDate: "2026-08-05"
+  },
+  {
+    id: 11,
+    clientId: 7,
+    clientName: "Rumbidzai Gumbo",
+    serviceId: 3,
+    serviceName: "Logo Design",
+    currentPrice: 299,
+    renewalPrice: 349,
+    renewalDate: "2025-08-10",
+    status: "Upcoming",
+    autoRenew: false,
+    notes: "Logo refresh requested, price increase for additional revisions",
+    lastRenewalDate: "2024-08-10",
+    nextRenewalDate: "2026-08-10"
+  },
+  {
+    id: 12,
+    clientId: 8,
+    clientName: "Kudzai Mupfumira",
+    serviceId: 2,
+    serviceName: "SEO Optimization",
+    currentPrice: 499,
+    renewalPrice: 499,
+    renewalDate: "2025-08-15",
+    status: "Upcoming",
+    autoRenew: true,
+    notes: "Standard SEO renewal, performance has improved",
+    lastRenewalDate: "2024-08-15",
+    nextRenewalDate: "2026-08-15"
+  },
+  {
+    id: 13,
+    clientId: 1,
+    clientName: "Tendai Moyo",
+    serviceId: 5,
+    serviceName: "Mobile App Development",
+    currentPrice: 2499,
+    renewalPrice: 2749,
+    renewalDate: "2025-08-20",
+    status: "Upcoming",
+    autoRenew: true,
+    notes: "App maintenance and updates renewal",
+    lastRenewalDate: "2024-08-20",
+    nextRenewalDate: "2026-08-20"
+  },
+  {
+    id: 14,
+    clientId: 3,
+    clientName: "Rutendo Ndlovu",
+    serviceId: 6,
+    serviceName: "Content Writing",
+    currentPrice: 199,
+    renewalPrice: 199,
+    renewalDate: "2025-08-25",
+    status: "Upcoming",
+    autoRenew: false,
+    notes: "Monthly content writing service renewal",
+    lastRenewalDate: "2024-08-25",
+    nextRenewalDate: "2026-08-25"
+  },
+  {
+    id: 15,
+    clientId: 6,
+    clientName: "Tafadzwa Sibanda",
+    serviceId: 3,
+    serviceName: "Logo Design",
+    currentPrice: 299,
+    renewalPrice: 299,
+    renewalDate: "2025-07-01",
+    status: "Upcoming",
+    autoRenew: false,
+    notes: "First-time logo design project",
+    nextRenewalDate: "2025-09-01"
+  },
+  {
+    id: 16,
+    clientId: 4,
+    clientName: "Tatenda Mutasa",
+    serviceId: 6,
+    serviceName: "Content Writing",
+    currentPrice: 199,
+    renewalPrice: 249,
+    renewalDate: "2025-09-05",
+    status: "Upcoming",
+    autoRenew: true,
+    notes: "Content writing service renewal with expanded scope",
+    lastRenewalDate: "2024-09-05",
+    nextRenewalDate: "2026-09-05"
+  },
+  {
+    id: 17,
+    clientId: 2,
+    clientName: "Farai Chikomba",
+    serviceId: 1,
+    serviceName: "Website Development",
+    currentPrice: 999,
+    renewalPrice: 999,
+    renewalDate: "2025-09-10",
+    status: "Upcoming",
+    autoRenew: true,
+    notes: "Website maintenance and hosting renewal",
+    lastRenewalDate: "2024-09-10",
+    nextRenewalDate: "2026-09-10"
+  },
+  {
+    id: 18,
+    clientId: 5,
+    clientName: "Chiedza Marufu",
+    serviceId: 5,
+    serviceName: "Mobile App Development",
+    currentPrice: 2499,
+    renewalPrice: 2499,
+    renewalDate: "2025-09-15",
+    status: "Upcoming",
+    autoRenew: true,
+    notes: "Mobile app hosting and maintenance renewal",
+    lastRenewalDate: "2024-09-15",
+    nextRenewalDate: "2026-09-15"
   }
 ];
 
@@ -454,7 +603,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 1,
     clientId: 1,
-    clientName: "Sophia Carter",
+    clientName: "Tendai Moyo",
     title: "Follow up on website redesign proposal",
     description: "Send follow-up email regarding the e-commerce website redesign proposal",
     dueDate: "2024-01-20",
@@ -469,7 +618,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 2,
     clientId: 2,
-    clientName: "Ethan Zhang",
+    clientName: "Farai Chikomba",
     title: "SEO campaign review meeting",
     description: "Schedule and conduct monthly SEO campaign performance review",
     dueDate: "2024-01-25",
@@ -485,7 +634,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 3,
     clientId: 4,
-    clientName: "Liam Kim",
+    clientName: "Tatenda Mutasa",
     title: "Mobile app payment reminder",
     description: "Send payment reminder for mobile app development project",
     dueDate: "2024-01-15",
@@ -500,7 +649,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 4,
     clientId: 5,
-    clientName: "Ava Harris",
+    clientName: "Chiedza Marufu",
     title: "Brand identity project completion",
     description: "Finalize and deliver brand identity package",
     dueDate: "2024-01-30",
@@ -516,7 +665,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 5,
     clientId: 7,
-    clientName: "Emma Davis",
+    clientName: "Rumbidzai Gumbo",
     title: "Social media content planning",
     description: "Plan and schedule next month's social media content",
     dueDate: "2024-02-01",
@@ -532,7 +681,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 6,
     clientId: 8,
-    clientName: "William Brown",
+    clientName: "Kudzai Mupfumira",
     title: "Website maintenance check",
     description: "Perform routine website maintenance and security updates",
     dueDate: "2024-01-22",
@@ -548,7 +697,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 7,
     clientId: 1,
-    clientName: "Sophia Carter",
+    clientName: "Tendai Moyo",
     title: "Contract renewal discussion",
     description: "Discuss contract renewal terms and pricing",
     dueDate: "2024-02-10",
@@ -563,7 +712,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 8,
     clientId: 6,
-    clientName: "Noah Wilson",
+    clientName: "Tafadzwa Sibanda",
     title: "Initial consultation call",
     description: "Conduct initial consultation call with prospect",
     dueDate: "2024-01-18",
@@ -579,7 +728,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 9,
     clientId: 3,
-    clientName: "Olivia Bennett",
+    clientName: "Rutendo Ndlovu",
     title: "Reactivation campaign",
     description: "Send reactivation email to inactive client",
     dueDate: "2024-01-28",
@@ -594,7 +743,7 @@ export const mockReminders: Reminder[] = [
   {
     id: 10,
     clientId: 4,
-    clientName: "Liam Kim",
+    clientName: "Tatenda Mutasa",
     title: "Project milestone review",
     description: "Review mobile app development milestone and plan next phase",
     dueDate: "2024-02-05",
@@ -764,7 +913,7 @@ export const generateServiceReport = (): ServiceReport[] => {
       serviceName: service.name,
       totalRevenue,
       clientCount: clientIds.size,
-      averagePrice: service.price,
+      averagePrice: service.basePrice,
       category: service.category
     };
   });
@@ -991,26 +1140,26 @@ export const getOverdueRemindersForReports = (limit: number = 10): Reminder[] =>
 // Settings data
 export const defaultUserProfile: UserProfile = {
   id: 1,
-  name: "John Doe",
-  email: "john.doe@example.com",
+  name: "Tinashe Chiwenga",
+  email: "tinashe.chiwenga@clienttrack.zw",
   role: "Administrator",
-  phone: "+1 (555) 123-4567",
-  timezone: "America/New_York",
+  phone: "+263 77 123 4567",
+  timezone: "Africa/Harare",
   language: "en",
-  dateFormat: "MM/DD/YYYY",
-  currency: "USD"
+  dateFormat: "DD/MM/YYYY",
+  currency: "ZWL"
 };
 
 export const defaultCompanySettings: CompanySettings = {
-  name: "Acme Consulting Services",
-  email: "contact@acmeconsulting.com",
-  phone: "+1 (555) 987-6543",
-  address: "123 Business Ave, Suite 100, New York, NY 10001",
-  website: "https://acmeconsulting.com",
-  industry: "Consulting",
-  timezone: "America/New_York",
-  currency: "USD",
-  taxRate: 8.5,
+  name: "ClientTrack Zimbabwe",
+  email: "contact@clienttrack.zw",
+  phone: "+263 4 123 4567",
+  address: "123 Samora Machel Avenue, Harare, Zimbabwe",
+  website: "https://clienttrack.zw",
+  industry: "Technology",
+  timezone: "Africa/Harare",
+  currency: "ZWL",
+  taxRate: 14.5,
   invoicePrefix: "INV",
   invoiceNumbering: "sequential"
 };
@@ -1186,58 +1335,61 @@ export const importSettings = (file: File): Promise<void> => {
 
 // Available options for settings
 export const timezoneOptions = [
-  { value: 'America/New_York', label: 'Eastern Time (ET)' },
-  { value: 'America/Chicago', label: 'Central Time (CT)' },
-  { value: 'America/Denver', label: 'Mountain Time (MT)' },
-  { value: 'America/Los_Angeles', label: 'Pacific Time (PT)' },
+  { value: 'Africa/Harare', label: 'Harare (CAT)' },
+  { value: 'Africa/Johannesburg', label: 'Johannesburg (SAST)' },
+  { value: 'Africa/Lagos', label: 'Lagos (WAT)' },
+  { value: 'Africa/Cairo', label: 'Cairo (EET)' },
   { value: 'Europe/London', label: 'London (GMT)' },
   { value: 'Europe/Paris', label: 'Paris (CET)' },
-  { value: 'Asia/Tokyo', label: 'Tokyo (JST)' },
-  { value: 'Australia/Sydney', label: 'Sydney (AEST)' }
+  { value: 'America/New_York', label: 'New York (EST)' },
+  { value: 'Asia/Tokyo', label: 'Tokyo (JST)' }
 ];
 
 export const languageOptions = [
   { value: 'en', label: 'English' },
+  { value: 'sn', label: 'Shona' },
+  { value: 'nd', label: 'Ndebele' },
   { value: 'es', label: 'Spanish' },
   { value: 'fr', label: 'French' },
   { value: 'de', label: 'German' },
-  { value: 'it', label: 'Italian' },
   { value: 'pt', label: 'Portuguese' },
-  { value: 'ja', label: 'Japanese' },
-  { value: 'zh', label: 'Chinese' }
+  { value: 'ja', label: 'Japanese' }
 ];
 
 export const currencyOptions = [
+  { value: 'ZWL', label: 'Zimbabwe Dollar (Z$)' },
   { value: 'USD', label: 'US Dollar ($)' },
   { value: 'EUR', label: 'Euro (€)' },
   { value: 'GBP', label: 'British Pound (£)' },
-  { value: 'CAD', label: 'Canadian Dollar (C$)' },
-  { value: 'AUD', label: 'Australian Dollar (A$)' },
+  { value: 'ZAR', label: 'South African Rand (R)' },
+  { value: 'BWP', label: 'Botswana Pula (P)' },
   { value: 'JPY', label: 'Japanese Yen (¥)' },
-  { value: 'CHF', label: 'Swiss Franc (CHF)' },
   { value: 'CNY', label: 'Chinese Yuan (¥)' }
 ];
 
 export const dateFormatOptions = [
-  { value: 'MM/DD/YYYY', label: 'MM/DD/YYYY' },
   { value: 'DD/MM/YYYY', label: 'DD/MM/YYYY' },
+  { value: 'MM/DD/YYYY', label: 'MM/DD/YYYY' },
   { value: 'YYYY-MM-DD', label: 'YYYY-MM-DD' },
   { value: 'MM-DD-YYYY', label: 'MM-DD-YYYY' },
   { value: 'DD-MM-YYYY', label: 'DD-MM-YYYY' }
 ];
 
 export const industryOptions = [
-  'Consulting',
   'Technology',
-  'Healthcare',
+  'Mining',
+  'Agriculture',
+  'Tourism',
+  'Manufacturing',
   'Finance',
+  'Healthcare',
   'Education',
   'Retail',
-  'Manufacturing',
   'Real Estate',
   'Legal',
   'Marketing',
   'Design',
+  'Consulting',
   'Other'
 ];
 
