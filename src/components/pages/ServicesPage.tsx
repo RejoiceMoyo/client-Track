@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Search, Edit, Trash2, Eye, DollarSign, Clock, Tag, Package } from 'lucide-react';
 import type { Service } from '../../types';
-import { mockServices } from '../../data';
+// import { mockServices } from '../../data'; // Removed
 import { ConfirmDeleteModal } from '../common/ConfirmDeleteModal';
 import { DetailViewModal, DetailSection, DetailRow, DetailGrid } from '../common/DetailViewModal';
 
@@ -159,7 +159,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, onClose, service, m
 };
 
 export const ServicesPage: React.FC = () => {
-  const [services, setServices] = useState<Service[]>(mockServices);
+  const [services, setServices] = useState<Service[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -216,9 +216,9 @@ export const ServicesPage: React.FC = () => {
     if (modalMode === 'create') {
       const newService: Service = {
         ...serviceData,
-        id: Math.max(...services.map(s => s.id)) + 1,
-        basePrice: 0,
-        baseDuration: ''
+        id: new Date().getTime(), // Using timestamp for temporary unique ID
+        basePrice: serviceData.price, // Assuming basePrice is same as price for new mock service
+        baseDuration: serviceData.duration // Assuming baseDuration is same as duration for new mock service
       };
       setServices([...services, newService]);
     } else {

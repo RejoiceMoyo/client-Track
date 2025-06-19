@@ -1,128 +1,67 @@
 import type { Client, Service, Invoice, Project, Contact, DashboardStats, Renewal, Reminder, RevenueReport, ClientReport, ServiceReport, ProjectReport, RenewalReport, ReminderReport, ChartData, UserProfile, CompanySettings, NotificationSettings, SecuritySettings, InvoiceSettings, ReminderSettings, IntegrationSettings, BackupSettings, ThemeSettings } from './types';
 
-// Mock data for services (what we offer)
-export const mockServices: Service[] = [
-  {
-    id: 1,
-    name: "Website Development",
-    description: "Custom website development with modern technologies",
-    basePrice: 999,
-    baseDuration: "2-4 weeks",
-    category: "Development",
-    price: 999,
-    duration: "2-4 weeks"
-  },
-  {
-    id: 2,
-    name: "SEO Optimization",
-    description: "Search engine optimization for better rankings",
-    basePrice: 499,
-    baseDuration: "1-2 weeks",
-    category: "Marketing",
-    price: 499,
-    duration: "1-2 weeks"
-  },
-  {
-    id: 3,
-    name: "Logo Design",
-    description: "Professional logo design and branding",
-    basePrice: 299,
-    baseDuration: "1 week",
-    category: "Design",
-    price: 299,
-    duration: "1 week"
-  },
-  {
-    id: 4,
-    name: "Social Media Management",
-    description: "Monthly social media content and management",
-    basePrice: 399,
-    baseDuration: "Ongoing",
-    category: "Marketing",
-    price: 399,
-    duration: "Ongoing"
-  },
-  {
-    id: 5,
-    name: "Mobile App Development",
-    description: "Cross-platform mobile application development",
-    basePrice: 2499,
-    baseDuration: "6-8 weeks",
-    category: "Development",
-    price: 2499,
-    duration: "6-8 weeks"
-  },
-  {
-    id: 6,
-    name: "Content Writing",
-    description: "Professional content writing for websites and blogs",
-    basePrice: 199,
-    baseDuration: "3-5 days",
-    category: "Content",
-    price: 199,
-    duration: "3-5 days"
-  }
-];
+// Mock data for services (what we offer) - REMOVED
+// export const mockServices: Service[] = [ ... ];
 
-// Mock data for invoices
-export const mockInvoices: Invoice[] = [
-  {
-    id: 1,
-    clientId: 1,
-    clientName: "Tendai Moyo",
-    amount: 999,
-    status: "Paid",
-    dueDate: "2024-01-20",
-    issueDate: "2024-01-01",
-    services: [mockServices[0]]
-  },
-  {
-    id: 2,
-    clientId: 2,
-    clientName: "Farai Chikomba",
-    amount: 499,
-    status: "Pending",
-    dueDate: "2024-01-25",
-    issueDate: "2024-01-05",
-    services: [mockServices[1]]
-  },
-  {
-    id: 3,
-    clientId: 4,
-    clientName: "Tatenda Mutasa",
-    amount: 2499,
-    status: "Overdue",
-    dueDate: "2024-01-15",
-    issueDate: "2023-12-15",
-    services: [mockServices[4]]
-  },
-  {
-    id: 4,
-    clientId: 5,
-    clientName: "Chiedza Marufu",
-    amount: 399,
-    status: "Paid",
-    dueDate: "2024-01-30",
-    issueDate: "2024-01-10",
-    services: [mockServices[3]]
-  },
-  {
-    id: 5,
-    clientId: 7,
-    clientName: "Rumbidzai Gumbo",
-    amount: 598,
-    status: "Pending",
-    dueDate: "2024-02-05",
-    issueDate: "2024-01-15",
-    services: [mockServices[1], mockServices[3]]
-  }
-];
+// REMOVED: mockInvoices
+// export const mockInvoices: Invoice[] = [
+//   {
+//     id: 1,
+//     clientId: 1,
+//     clientName: "Tendai Moyo",
+//     amount: 999,
+//     status: "Paid",
+//     dueDate: "2024-01-20",
+//     issueDate: "2024-01-01",
+//     services: [] // Was [mockServices[0]]
+//   },
+//   {
+//     id: 2,
+//     clientId: 2,
+//     clientName: "Farai Chikomba",
+//     amount: 499,
+//     status: "Pending",
+//     dueDate: "2024-01-25",
+//     issueDate: "2024-01-05",
+//     services: [] // Was [mockServices[1]]
+//   },
+//   {
+//     id: 3,
+//     clientId: 4,
+//     clientName: "Tatenda Mutasa",
+//     amount: 2499,
+//     status: "Overdue",
+//     dueDate: "2024-01-15",
+//     issueDate: "2023-12-15",
+//     services: [] // Was [mockServices[4]]
+//   },
+//   {
+//     id: 4,
+//     clientId: 5,
+//     clientName: "Chiedza Marufu",
+//     amount: 399,
+//     status: "Paid",
+//     dueDate: "2024-01-30",
+//     issueDate: "2024-01-10",
+//     services: [] // Was [mockServices[3]]
+//   },
+//   {
+//     id: 5,
+//     clientId: 7,
+//     clientName: "Rumbidzai Gumbo",
+//     amount: 598,
+//     status: "Pending",
+//     dueDate: "2024-02-05",
+//     issueDate: "2024-01-15",
+//     services: [] // Was [mockServices[1], mockServices[3]]
+//   }
+// ];
 
-// Mock data for projects
-export const mockProjects: Project[] = [
-  {
-    id: 1,
-    clientId: 1,
+// REMOVED: mockProjects
+// export const mockProjects: Project[] = [
+//   {
+//     id: 1,
+//     clientId: 1,
     clientName: "Tendai Moyo",
     serviceId: 1,
     serviceName: "Website Development",
@@ -222,11 +161,11 @@ export const mockProjects: Project[] = [
   }
 ];
 
-// Mock data for contacts
-export const mockContacts: Contact[] = [
-  {
-    id: 1,
-    clientId: 1,
+// REMOVED: mockContacts
+// export const mockContacts: Contact[] = [
+//   {
+//     id: 1,
+//     clientId: 1,
     type: "Meeting",
     date: "2024-01-15",
     description: "Project kickoff meeting for e-commerce redesign",
@@ -282,11 +221,11 @@ export const mockContacts: Contact[] = [
   }
 ];
 
-// Mock data for renewals
-export const mockRenewals: Renewal[] = [
-  {
-    id: 1,
-    projectId: 1,
+// REMOVED: mockRenewals
+// export const mockRenewals: Renewal[] = [
+//   {
+//     id: 1,
+//     projectId: 1,
     clientId: 1,
     clientName: "Tendai Moyo",
     serviceId: 1,
@@ -754,58 +693,61 @@ export const mockReminders: Reminder[] = [
 //   return mockClients.find(client => client.id === id);
 // }; // Removed as mockClients is removed
 
-export const getClientInvoices = (clientId: number): Invoice[] => {
-  return mockInvoices.filter(invoice => invoice.clientId === clientId);
-};
+// REMOVED: getClientInvoices (depended on mockInvoices)
+// export const getClientInvoices = (clientId: number): Invoice[] => {
+//   return mockInvoices.filter(invoice => invoice.clientId === clientId);
+// };
 
-export const getClientProjects = (clientId: number): Project[] => {
-  return mockProjects.filter(project => project.clientId === clientId);
-};
+// REMOVED: getClientProjects (depended on mockProjects)
+// export const getClientProjects = (clientId: number): Project[] => {
+//   return mockProjects.filter(project => project.clientId === clientId);
+// };
 
-export const getClientContacts = (clientId: number): Contact[] => {
-  return mockContacts.filter(contact => contact.clientId === clientId);
-};
+// REMOVED: getClientContacts (depended on mockContacts)
+// export const getClientContacts = (clientId: number): Contact[] => {
+//   return mockContacts.filter(contact => contact.clientId === clientId);
+// };
 
-export const getClientServices = (clientId: number): Service[] => {
-  const clientInvoices = getClientInvoices(clientId);
-  const serviceIds = new Set<number>();
+// export const getClientServices = (clientId: number): Service[] => {
+//   const clientInvoices = getClientInvoices(clientId);
+//   const serviceIds = new Set<number>();
   
-  clientInvoices.forEach(invoice => {
-    invoice.services.forEach(service => {
-      serviceIds.add(service.id);
-    });
-  });
+//   clientInvoices.forEach(invoice => {
+//     invoice.services.forEach(service => {
+//       serviceIds.add(service.id);
+//     });
+//   });
   
-  return mockServices.filter(service => serviceIds.has(service.id));
-};
+//   return mockServices.filter(service => serviceIds.has(service.id));
+// }; // Removed as mockServices is removed
 
-// Helper functions for renewals
-export const getRenewalsByClient = (clientId: number): Renewal[] => {
-  return mockRenewals.filter(renewal => renewal.clientId === clientId);
-};
+// Helper functions for renewals - REMOVED as they depend on mockRenewals
+// export const getRenewalsByClient = (clientId: number): Renewal[] => {
+//   return mockRenewals.filter(renewal => renewal.clientId === clientId);
+// };
 
-export const getRenewalsByService = (serviceId: number): Renewal[] => {
-  return mockRenewals.filter(renewal => renewal.serviceId === serviceId);
-};
+// export const getRenewalsByService = (serviceId: number): Renewal[] => {
+//   return mockRenewals.filter(renewal => renewal.serviceId === serviceId);
+// };
 
-export const getUpcomingRenewals = (days: number = 30): Renewal[] => {
-  const today = new Date();
-  const futureDate = new Date();
-  futureDate.setDate(today.getDate() + days);
+// export const getUpcomingRenewals = (days: number = 30): Renewal[] => {
+//   const today = new Date();
+//   const futureDate = new Date();
+//   futureDate.setDate(today.getDate() + days);
   
-  return mockRenewals.filter(renewal => {
-    const renewalDate = new Date(renewal.renewalDate);
-    return renewalDate >= today && renewalDate <= futureDate && renewal.status === 'Upcoming';
-  });
-};
+//   return mockRenewals.filter(renewal => {
+//     const renewalDate = new Date(renewal.renewalDate);
+//     return renewalDate >= today && renewalDate <= futureDate && renewal.status === 'Upcoming';
+//   });
+// };
 
-export const getOverdueRenewals = (): Renewal[] => {
-  const today = new Date();
-  return mockRenewals.filter(renewal => {
-    const renewalDate = new Date(renewal.renewalDate);
-    return renewalDate < today && renewal.status === 'Due';
-  });
-};
+// export const getOverdueRenewals = (): Renewal[] => {
+//   const today = new Date();
+//   return mockRenewals.filter(renewal => {
+//     const renewalDate = new Date(renewal.renewalDate);
+//     return renewalDate < today && renewal.status === 'Due';
+//   });
+// };
 
 // Helper functions for reminders
 export const getRemindersByClient = (clientId: number): Reminder[] => {
@@ -847,28 +789,29 @@ export const getHighPriorityReminders = (): Reminder[] => {
 // generateRevenueReport, generateClientReport, generateClientTypeChartData, getTopClientsByRevenue
 // were removed as they depended on mockClients.
 
-export const generateServiceReport = (): ServiceReport[] => {
-  return mockServices.map(service => {
-    const serviceInvoices = mockInvoices.filter(invoice => 
-      invoice.services.some(s => s.id === service.id)
-    );
-    const totalRevenue = serviceInvoices.reduce((sum, invoice) => sum + invoice.amount, 0);
-    const clientIds = new Set(serviceInvoices.map(invoice => invoice.clientId));
+// export const generateServiceReport = (): ServiceReport[] => {
+//   return mockServices.map(service => {
+//     const serviceInvoices = mockInvoices.filter(invoice =>
+//       invoice.services.some(s => s.id === service.id)
+//     );
+//     const totalRevenue = serviceInvoices.reduce((sum, invoice) => sum + invoice.amount, 0);
+//     const clientIds = new Set(serviceInvoices.map(invoice => invoice.clientId));
 
-    return {
-      serviceName: service.name,
-      totalRevenue,
-      clientCount: clientIds.size,
-      averagePrice: service.basePrice,
-      category: service.category
-    };
-  });
-};
+//     return {
+//       serviceName: service.name,
+//       totalRevenue,
+//       clientCount: clientIds.size,
+//       averagePrice: service.basePrice,
+//       category: service.category
+//     };
+//   });
+// }; // Removed as mockServices is removed
 
-export const generateProjectReport = (period: string = '30days'): ProjectReport => {
-  const totalProjects = mockProjects.length;
-  const activeProjects = mockProjects.filter(project => project.status === 'Active').length;
-  const completedProjects = mockProjects.filter(project => project.status === 'Completed').length;
+// REMOVED: generateProjectReport (depended on mockProjects)
+// export const generateProjectReport = (period: string = '30days'): ProjectReport => {
+//   const totalProjects = mockProjects.length;
+//   const activeProjects = mockProjects.filter(project => project.status === 'Active').length;
+//   const completedProjects = mockProjects.filter(project => project.status === 'Completed').length;
   const onHoldProjects = mockProjects.filter(project => project.status === 'On Hold').length;
   const totalBudget = mockProjects.reduce((sum, project) => sum + project.budget, 0);
   const averageProgress = mockProjects.reduce((sum, project) => sum + project.progress, 0) / totalProjects;
@@ -959,53 +902,54 @@ export const generateRevenueChartData = (): ChartData => {
 
 // Removed generateClientTypeChartData as it depended on mockClients.
 
-export const generateServiceRevenueChartData = (): ChartData => {
-  const serviceReport = generateServiceReport();
+// export const generateServiceRevenueChartData = (): ChartData => {
+//   const serviceReport = generateServiceReport(); // This function is now removed
   
-  return {
-    labels: serviceReport.map(service => service.serviceName),
-    datasets: [
-      {
-        label: 'Revenue',
-        data: serviceReport.map(service => service.totalRevenue),
-        backgroundColor: [
-          'rgba(239, 68, 68, 0.8)',
-          'rgba(245, 158, 11, 0.8)',
-          'rgba(34, 197, 94, 0.8)',
-          'rgba(59, 130, 246, 0.8)',
-          'rgba(168, 85, 247, 0.8)',
-          'rgba(236, 72, 153, 0.8)'
-        ],
-        borderColor: [
-          'rgba(239, 68, 68, 1)',
-          'rgba(245, 158, 11, 1)',
-          'rgba(34, 197, 94, 1)',
-          'rgba(59, 130, 246, 1)',
-          'rgba(168, 85, 247, 1)',
-          'rgba(236, 72, 153, 1)'
-        ],
-        borderWidth: 1
-      }
-    ]
-  };
-};
+//   return {
+//     labels: serviceReport.map(service => service.serviceName),
+//     datasets: [
+//       {
+//         label: 'Revenue',
+//         data: serviceReport.map(service => service.totalRevenue),
+//         backgroundColor: [
+//           'rgba(239, 68, 68, 0.8)',
+//           'rgba(245, 158, 11, 0.8)',
+//           'rgba(34, 197, 94, 0.8)',
+//           'rgba(59, 130, 246, 0.8)',
+//           'rgba(168, 85, 247, 0.8)',
+//           'rgba(236, 72, 153, 0.8)'
+//         ],
+//         borderColor: [
+//           'rgba(239, 68, 68, 1)',
+//           'rgba(245, 158, 11, 1)',
+//           'rgba(34, 197, 94, 1)',
+//           'rgba(59, 130, 246, 1)',
+//           'rgba(168, 85, 247, 1)',
+//           'rgba(236, 72, 153, 1)'
+//         ],
+//         borderWidth: 1
+//       }
+//     ]
+//   };
+// }; // Removed as generateServiceReport is removed
 
-export const generateProjectStatusChartData = (): ChartData => {
-  const projectReport = generateProjectReport();
+// REMOVED: generateProjectStatusChartData (depended on generateProjectReport and mockProjects)
+// export const generateProjectStatusChartData = (): ChartData => {
+//   const projectReport = generateProjectReport();
   
-  return {
-    labels: ['Active', 'Completed', 'On Hold', 'Cancelled'],
-    datasets: [
-      {
-        label: 'Project Count',
-        data: [
-          projectReport.activeProjects,
-          projectReport.completedProjects,
-          projectReport.onHoldProjects,
-          mockProjects.filter(project => project.status === 'Cancelled').length
-        ],
-        backgroundColor: [
-          'rgba(34, 197, 94, 0.8)',
+//   return {
+//     labels: ['Active', 'Completed', 'On Hold', 'Cancelled'],
+//     datasets: [
+//       {
+//         label: 'Project Count',
+//         data: [
+//           projectReport.activeProjects,
+//           projectReport.completedProjects,
+//           projectReport.onHoldProjects,
+//           mockProjects.filter(project => project.status === 'Cancelled').length
+//         ],
+//         backgroundColor: [
+//           'rgba(34, 197, 94, 0.8)',
           'rgba(59, 130, 246, 0.8)',
           'rgba(245, 158, 11, 0.8)',
           'rgba(239, 68, 68, 0.8)'
@@ -1026,16 +970,17 @@ export const generateProjectStatusChartData = (): ChartData => {
 // Removed getTopClientsByRevenue as it depended on mockClients.
 
 export const getTopServicesByRevenue = (limit: number = 5): ServiceReport[] => {
-  return generateServiceReport()
+  return generateServiceReport() // generateServiceReport is already commented out
     .sort((a, b) => b.totalRevenue - a.totalRevenue)
     .slice(0, limit);
 };
 
-export const getRecentInvoices = (limit: number = 10): Invoice[] => {
-  return [...mockInvoices]
-    .sort((a, b) => new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime())
-    .slice(0, limit);
-};
+// REMOVED: getRecentInvoices (depended on mockInvoices)
+// export const getRecentInvoices = (limit: number = 10): Invoice[] => {
+//   return [...mockInvoices]
+//     .sort((a, b) => new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime())
+//     .slice(0, limit);
+// };
 
 export const getUpcomingRenewalsForReports = (limit: number = 10): Renewal[] => {
   return [...mockRenewals]
