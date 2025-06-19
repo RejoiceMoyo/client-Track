@@ -216,7 +216,9 @@ export const ServicesPage: React.FC = () => {
     if (modalMode === 'create') {
       const newService: Service = {
         ...serviceData,
-        id: Math.max(...services.map(s => s.id)) + 1
+        id: Math.max(...services.map(s => s.id)) + 1,
+        basePrice: 0,
+        baseDuration: ''
       };
       setServices([...services, newService]);
     } else {

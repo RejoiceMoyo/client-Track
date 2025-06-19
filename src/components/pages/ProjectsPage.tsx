@@ -8,13 +8,20 @@ import { DetailViewModal, DetailSection, DetailRow, DetailGrid } from '../common
 const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project, mode, onSubmit }) => {
   const [formData, setFormData] = useState<ProjectFormData>({
     clientId: project?.clientId || 1,
+    serviceId: project?.serviceId || 1,
     name: project?.name || '',
     description: project?.description || '',
     status: project?.status || 'Active',
-    startDate: project?.startDate || new Date().toISOString().split('T')[0],
+    startDate: project?.startDate || '',
     endDate: project?.endDate || '',
-    budget: project?.budget || 0,
-    progress: project?.progress || 0
+    negotiatedPrice: project?.negotiatedPrice || 0,
+    negotiatedDuration: project?.negotiatedDuration || '',
+    paymentStructure: project?.paymentStructure || 'One-time',
+    billingFrequency: project?.billingFrequency || 1,
+    totalValue: project?.totalValue || 0,
+    progress: project?.progress || 0,
+    notes: project?.notes || '',
+    budget: project?.budget || 0
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -250,7 +257,20 @@ export const ProjectsPage: React.FC = () => {
       const newProject: Project = {
         ...projectData,
         id: Math.max(...projects.map(p => p.id)) + 1,
-        clientName: client?.name || ''
+        clientName: client?.name || '',
+        serviceId: 1, // Assuming a default serviceId
+        negotiatedPrice: 0, // Assuming a default negotiatedPrice
+        negotiatedDuration: '', // Assuming a default negotiatedDuration
+        paymentStructure: 'One-time', // Assuming a default paymentStructure
+        billingFrequency: 1, // Assuming a default billingFrequency
+        totalValue: 0, // Assuming a default totalValue
+        notes: '', // Assuming a default notes
+        status: 'Active', // Assuming a default status
+        startDate: new Date().toISOString().split('T')[0], // Assuming a default startDate
+        endDate: '', // Assuming a default endDate
+        budget: 0, // Assuming a default budget
+        progress: 0, // Assuming a default progress
+        serviceName: 'Default Service' // Assuming a default serviceName
       };
       setProjects([...projects, newProject]);
     } else {
@@ -259,7 +279,20 @@ export const ProjectsPage: React.FC = () => {
           ? { 
               ...project, 
               ...projectData,
-              clientName: client?.name || project.clientName
+              clientName: client?.name || project.clientName,
+              serviceId: 1, // Assuming a default serviceId
+              negotiatedPrice: 0, // Assuming a default negotiatedPrice
+              negotiatedDuration: '', // Assuming a default negotiatedDuration
+              paymentStructure: 'One-time', // Assuming a default paymentStructure
+              billingFrequency: 1, // Assuming a default billingFrequency
+              totalValue: 0, // Assuming a default totalValue
+              notes: '', // Assuming a default notes
+              status: 'Active', // Assuming a default status
+              startDate: new Date().toISOString().split('T')[0], // Assuming a default startDate
+              endDate: '', // Assuming a default endDate
+              budget: 0, // Assuming a default budget
+              progress: 0, // Assuming a default progress
+              serviceName: 'Default Service' // Assuming a default serviceName
             }
           : project
       ));

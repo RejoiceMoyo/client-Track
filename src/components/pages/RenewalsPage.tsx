@@ -272,7 +272,9 @@ export const RenewalsPage: React.FC = () => {
         ...renewalData,
         id: Math.max(...renewals.map(r => r.id)) + 1,
         clientName: client?.name || '',
-        serviceName: service?.name || ''
+        serviceName: service?.name || '',
+        projectId: 1,
+        billingFrequency: 12
       };
       setRenewals([...renewals, newRenewal]);
     } else {

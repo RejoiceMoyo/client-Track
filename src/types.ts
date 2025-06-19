@@ -39,6 +39,8 @@ export interface Service {
   basePrice: number;
   baseDuration: string;
   category: string;
+  price: number;
+  duration: string;
 }
 
 export interface Project {
@@ -59,6 +61,7 @@ export interface Project {
   totalValue: number;
   progress: number;
   notes?: string;
+  budget: number;
 }
 
 export interface Billing {
@@ -189,6 +192,7 @@ export interface ProjectFormData {
   totalValue: number;
   progress: number;
   notes: string;
+  budget: number;
 }
 
 export interface ProjectModalProps {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Calendar, DollarSign, Clock, Tag } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface DetailViewModalProps {
   isOpen: boolean;
