@@ -20,13 +20,13 @@ import {
   generateRevenueReport,
   generateClientReport,
   // generateServiceReport,
-  generateProjectReport,
+  // generateProjectReport, // Removed
   // generateRenewalReport,
   // generateReminderReport,
   generateRevenueChartData,
   generateClientTypeChartData,
   generateServiceRevenueChartData,
-  generateProjectStatusChartData,
+  // generateProjectStatusChartData, // Removed
   // getTopClientsByRevenue,
   // getRecentInvoices,
   // getUpcomingRenewalsForReports,
@@ -201,7 +201,7 @@ export const ReportsPage: React.FC = () => {
   const revenueReport = useMemo(() => generateRevenueReport(dateRange), [dateRange]);
   const clientReport = useMemo(() => generateClientReport(dateRange), [dateRange]);
   // const serviceReport = useMemo(() => generateServiceReport(), []);
-  const projectReport = useMemo(() => generateProjectReport(dateRange), [dateRange]);
+  // const projectReport = useMemo(() => generateProjectReport(dateRange), [dateRange]); // Removed
   // const renewalReport = useMemo(() => generateRenewalReport(dateRange), [dateRange]);
   // const reminderReport = useMemo(() => generateReminderReport(dateRange), [dateRange]);
 
@@ -209,7 +209,7 @@ export const ReportsPage: React.FC = () => {
   const revenueChartData = useMemo(() => generateRevenueChartData(), []);
   const clientTypeChartData = useMemo(() => generateClientTypeChartData(), []);
   const serviceRevenueChartData = useMemo(() => generateServiceRevenueChartData(), []);
-  const projectStatusChartData = useMemo(() => generateProjectStatusChartData(), []);
+  // const projectStatusChartData = useMemo(() => generateProjectStatusChartData(), []); // Removed
 
   // Get top performers
   // const topClients = useMemo(() => getTopClientsByRevenue(5), []);
@@ -243,15 +243,15 @@ export const ReportsPage: React.FC = () => {
         />
         <MetricCard
           title="Active Projects"
-          value={projectReport.activeProjects}
-          change={-3.1}
+          value={'N/A'} // Was projectReport.activeProjects - Updated due to mockProjects removal
+          change={0} // Updated due to mockProjects removal
           icon={<Target className="h-6 w-6 text-white" />}
           color="bg-purple-500"
         />
         <MetricCard
           title="Pending Invoices"
-          value={revenueReport.invoiceCount}
-          change={15.7}
+          value={'N/A'} // Was revenueReport.invoiceCount - Updated due to mockInvoices removal
+          change={0} // Updated due to mockInvoices removal
           icon={<AlertTriangle className="h-6 w-6 text-white" />}
           color="bg-orange-500"
         />
@@ -277,11 +277,11 @@ export const ReportsPage: React.FC = () => {
         height={250}
       />
 
-      {/* Project Status */}
-      <SimplePieChart
+      {/* Project Status - Chart Removed */}
+      {/* <SimplePieChart
         data={projectStatusChartData}
         title="Project Status Distribution"
-      />
+      /> */}
     </div>
   );
 
@@ -303,15 +303,15 @@ export const ReportsPage: React.FC = () => {
         />
         <MetricCard
           title="Active Projects"
-          value={projectReport.activeProjects}
-          change={-3.1}
+          value={'N/A'} // Was projectReport.activeProjects - Updated due to mockProjects removal
+          change={0} // Updated due to mockProjects removal
           icon={<Target className="h-6 w-6 text-white" />}
           color="bg-purple-500"
         />
         <MetricCard
           title="Pending Invoices"
-          value={revenueReport.invoiceCount}
-          change={15.7}
+          value={'N/A'} // Was revenueReport.invoiceCount - Updated due to mockInvoices removal
+          change={0} // Updated due to mockInvoices removal
           icon={<AlertTriangle className="h-6 w-6 text-white" />}
           color="bg-orange-500"
         />

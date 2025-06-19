@@ -1,10 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { Users, Package, DollarSign, Search, Plus, Eye, Edit, Trash2, AlertTriangle } from 'lucide-react';
-import { 
-  mockRenewals,
-  mockProjects,
-  mockInvoices
-} from '../../data';
 
 export const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -12,14 +7,14 @@ export const Dashboard: React.FC = () => {
   const [serviceFilter, setServiceFilter] = useState('active-services');
   const [expiryFilter, setExpiryFilter] = useState('expiring-soon');
 
-  // Calculate dashboard stats
-  const totalClients = Array.from(new Set(mockProjects.map(p => p.clientId))).length;
-  const totalRevenue = mockInvoices.reduce((sum, invoice) => sum + invoice.amount, 0);
-  const activeServices = mockProjects.filter(project => project.status === 'Active').length;
-  const expiringSoon = mockRenewals.filter(r => r.status === 'Upcoming' || r.status === 'Due').length;
+  // Placeholders for dashboard stats (replace with real data fetching logic)
+  const totalClients = 0;
+  const totalRevenue = 0;
+  const activeServices = 0;
+  const expiringSoon = 0;
 
-  // Filter renewals based on search and filters
-  const filteredRenewals = useMemo(() => mockRenewals, []);
+  // Placeholder for renewals (replace with real data fetching logic)
+  // const filteredRenewals = useMemo(() => [], []);
 
   const handleAddClient = () => {
     console.log('Opening add client form...');
@@ -167,91 +162,12 @@ export const Dashboard: React.FC = () => {
         </div>
 
         {/* Upcoming Service Renewals Table */}
+        {/*
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-          <div className="border-b border-gray-200 bg-gray-50/50 px-6 py-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">Service Renewals</h3>
-              <span className="text-sm text-gray-500">{filteredRenewals.length} results</span>
-            </div>
-          </div>
-          
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-gray-200 bg-gray-50/30">
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-600">Client</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-600">Service</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-600">Amount</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-600">Expiry Date</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-600">Status</th>
-                  <th className="text-left py-4 px-6 text-sm font-medium text-gray-600">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredRenewals.map((renewal) => (
-                  <tr key={renewal.id} className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-6">
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">{renewal.clientName}</div>
-                      </div>
-                    </td>
-                    <td className="py-4 px-6 text-sm text-blue-600 font-medium">{renewal.serviceName}</td>
-                    <td className="py-4 px-6 text-sm text-gray-900">${renewal.renewalPrice}</td>
-                    <td className="py-4 px-6 text-sm text-gray-500">{renewal.renewalDate}</td>
-                    <td className="py-4 px-6">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        renewal.status === "Overdue"
-                          ? "bg-red-100 text-red-800"
-                          : renewal.status === "Due"
-                            ? "bg-orange-100 text-orange-800"
-                            : renewal.status === "Upcoming"
-                              ? "bg-blue-100 text-blue-800"
-                              : renewal.status === "Completed"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-gray-100 text-gray-800"
-                      }`}>
-                        {renewal.status}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6">
-                      <div className="flex items-center space-x-1">
-                        <button
-                          onClick={() => handleViewClient(renewal.id)}
-                          className="p-2 text-blue-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
-                          title="View details"
-                        >
-                          <Eye className="h-4 w-4" />
-                        </button>
-                        <button
-                          onClick={() => handleEditClient(renewal.id)}
-                          className="p-2 text-green-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all duration-200"
-                          title="Edit client"
-                        >
-                          <Edit className="h-4 w-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteClient(renewal.id)}
-                          className="p-2 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
-                          title="Delete client"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          
-          {filteredRenewals.length === 0 && (
-            <div className="text-center py-12">
-              <Package className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No renewals found</h3>
-              <p className="text-gray-500">Try adjusting your search or filters</p>
-            </div>
-          )}
+          ...
         </div>
+        */}
+        {/* Service Renewals table removed: implement with real data source in the future */}
       </div>
     </div>
   );

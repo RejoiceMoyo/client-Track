@@ -206,62 +206,30 @@ export const generateProjectReport = (period: string = '30days'): ProjectReport 
 
   return {
     period,
-    totalProjects,
-    activeProjects,
-    completedProjects,
-    totalBudget,
-    averageProgress,
-    onHoldProjects
+    totalRevenue: 12000,
+    paidRevenue: 10000,
+    pendingRevenue: 1500,
+    overdueRevenue: 500,
+    clientCount: 10,
+    invoiceCount: 15,
   };
 };
 
-export const generateRenewalReport = (period: string = '30days'): RenewalReport => {
-  const totalRenewals = mockRenewals.length;
-  const completedRenewals = mockRenewals.filter(renewal => renewal.status === 'Completed').length;
-  const upcomingRenewals = mockRenewals.filter(renewal => renewal.status === 'Upcoming').length;
-  const overdueRenewals = mockRenewals.filter(renewal => renewal.status === 'Overdue').length;
-  const totalRenewalValue = mockRenewals.reduce((sum, renewal) => sum + renewal.renewalPrice, 0);
-
+export const generateClientReport = (period: string = '30days'): ClientReport => {
   return {
     period,
-    totalRenewals,
-    completedRenewals,
-    upcomingRenewals,
-    overdueRenewals,
-    totalRenewalValue,
-    averageRenewalRate: (completedRenewals / totalRenewals) * 100
+    totalClients: 10,
+    newClients: 2,
+    activeClients: 7,
+    inactiveClients: 2,
+    prospectClients: 1,
+    averageRevenuePerClient: 1200,
   };
 };
 
-export const generateReminderReport = (period: string = '30days'): ReminderReport => {
-  const totalReminders = mockReminders.length;
-  const completedReminders = mockReminders.filter(reminder => reminder.status === 'Completed').length;
-  const overdueReminders = mockReminders.filter(reminder => reminder.status === 'Overdue').length;
-  const pendingReminders = mockReminders.filter(reminder => reminder.status === 'Pending').length;
-  const highPriorityReminders = mockReminders.filter(reminder => 
-    reminder.priority === 'High' || reminder.priority === 'Urgent'
-  ).length;
-
+export const generateClientTypeChartData = (): ChartData => {
   return {
-    period,
-    totalReminders,
-    completedReminders,
-    overdueReminders,
-    pendingReminders,
-    highPriorityReminders,
-    averageCompletionRate: (completedReminders / totalReminders) * 100
-  };
-};
-
-// Chart data generators
-export const generateRevenueChartData = (): ChartData => {
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-  const revenueData = [12000, 15000, 18000, 14000, 22000, 25000];
-  const paidData = [10000, 12000, 15000, 11000, 18000, 20000];
-  const pendingData = [2000, 3000, 3000, 3000, 4000, 5000];
-
-  return {
-    labels: months,
+    labels: ['Individual', 'Business', 'Enterprise'],
     datasets: [
       {
         label: 'Total Revenue',

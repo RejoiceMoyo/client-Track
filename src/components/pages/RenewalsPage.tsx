@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Search, Edit, Trash2, Eye, DollarSign, Calendar, RefreshCw, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 import type { Renewal, RenewalFormData, RenewalModalProps } from '../../types';
-import { mockRenewals, mockClients, mockServices } from '../../data';
+// import { mockRenewals, mockClients, mockServices } from '../../data'; // Removed
 import { ConfirmDeleteModal } from '../common/ConfirmDeleteModal';
 import { DetailViewModal, DetailSection, DetailRow, DetailGrid } from '../common/DetailViewModal';
 
@@ -54,36 +54,29 @@ const RenewalModal: React.FC<RenewalModalProps> = ({ isOpen, onClose, renewal, m
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Client</label>
-                      <select
+                      <label className="block text-sm font-medium text-gray-700">Client ID</label>
+                      <input
+                        type="number"
                         name="clientId"
                         value={formData.clientId}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#096e6e] focus:border-[#096e6e]"
                         required
-                      >
-                        {mockClients.map(client => (
-                          <option key={client.id} value={client.id}>
-                            {client.name} - {client.company}
-                          </option>
-                        ))}
-                      </select>
+                        placeholder="Enter Client ID"
+                      />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Service</label>
-                      <select
+                      <label className="block text-sm font-medium text-gray-700">Service ID</label>
+                      <input
+                        type="number"
                         name="serviceId"
                         value={formData.serviceId}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#096e6e] focus:border-[#096e6e]"
                         required
-                      >
-                        {mockServices.map(service => (
-                          <option key={service.id} value={service.id}>
-                            {service.name} - ${service.price}
-                          </option>
-                        ))}
-                      </select>
+                        placeholder="Enter Service ID"
+                      />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -210,7 +203,7 @@ const RenewalModal: React.FC<RenewalModalProps> = ({ isOpen, onClose, renewal, m
 };
 
 export const RenewalsPage: React.FC = () => {
-  const [renewals, setRenewals] = useState<Renewal[]>(mockRenewals);
+  const [renewals, setRenewals] = useState<Renewal[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -264,17 +257,22 @@ export const RenewalsPage: React.FC = () => {
   };
 
   const handleSubmitRenewal = (renewalData: RenewalFormData) => {
-    const client = mockClients.find(c => c.id === renewalData.clientId);
-    const service = mockServices.find(s => s.id === renewalData.serviceId);
+    // const client = mockClients.find(c => c.id === renewalData.clientId); // mockClients removed
+    // const service = mockServices.find(s => s.id === renewalData.serviceId); // mockServices removed
+    const clientName = `Client ID: ${renewalData.clientId}`; // Placeholder
+    const serviceName = `Service ID: ${renewalData.serviceId}`; // Placeholder
     
     if (modalMode === 'create') {
       const newRenewal: Renewal = {
         ...renewalData,
-        id: Math.max(...renewals.map(r => r.id)) + 1,
-        clientName: client?.name || '',
-        serviceName: service?.name || '',
-        projectId: 1,
-        billingFrequency: 12
+        id: new Date().getTime(), // Using timestamp for temporary unique ID
+        clientName: clientName,
+        serviceName: serviceName,
+        projectId: renewalData.clientId || 1, // Use clientId as a stand-in for projectId or default
+        billingFrequency: renewalData.billingFrequency || 12, // Use from form or default
+        // Ensure all Renewal properties are covered, using defaults for those not in RenewalFormData
+        currentPrice: renewalData.currentPrice || 0,
+        lastRenewalDate: renewalData.renewalDate, // Or some other logic for last renewal date
       };
       setRenewals([...renewals, newRenewal]);
     } else {
@@ -283,8 +281,8 @@ export const RenewalsPage: React.FC = () => {
           ? { 
               ...renewal, 
               ...renewalData,
-              clientName: client?.name || renewal.clientName,
-              serviceName: service?.name || renewal.serviceName
+              clientName: clientName,
+              serviceName: serviceName
             }
           : renewal
       ));
