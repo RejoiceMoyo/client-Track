@@ -352,7 +352,7 @@ export const ClientsPage: React.FC = () => {
       };
 
       try {
-        const response = await fetch('https://ct-backend-3ge7.onrender.com/client', {
+        const response = await fetch('https://ct-backend-3ge7.onrender.com/api/v1/clients', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
