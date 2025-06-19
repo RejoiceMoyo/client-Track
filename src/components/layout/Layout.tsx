@@ -6,12 +6,10 @@ import {
   Settings,
   BarChart3,
   Calendar,
-  Mail,
   LogOut,
   Menu,
   X,
   User,
-  Building,
   Package,
   Bell,
   Target,
@@ -130,7 +128,7 @@ export const Layout: React.FC = () => {
                   <div className="flex items-center gap-x-2">
                     <User className="h-5 w-5 text-[#096e6e]" />
                     <span className="text-sm font-medium text-gray-800">{user?.name}</span>
-                    <span className="text-xs text-gray-80 hidden">({user?.role})</span>
+                    <span className="text-xs text-gray-80 ">({user?.role})</span>
                   </div>
                   <button
                     onClick={handleLogout}

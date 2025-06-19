@@ -1,60 +1,28 @@
 import React, { useState, useMemo } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { Users, Package, Calendar, TrendingUp, AlertTriangle, CheckCircle, DollarSign, Search, Filter, Plus, Eye, Edit, Trash2 } from 'lucide-react';
+import { Users, Package, DollarSign, Search, Plus, Eye, Edit, Trash2, AlertTriangle } from 'lucide-react';
 import { 
   dashboardStats, 
-  mockRenewals, 
   mockClients, 
-  mockInvoices, 
-  getUpcomingRenewals, 
-  getOverdueRenewals,
-  getRecentInvoices,
-  getTopClientsByRevenue
+  mockRenewals
 } from '../../data';
 
 export const Dashboard: React.FC = () => {
-  const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [clientFilter, setClientFilter] = useState('all-clients');
   const [serviceFilter, setServiceFilter] = useState('active-services');
   const [expiryFilter, setExpiryFilter] = useState('expiring-soon');
-  const [showClientForm, setShowClientForm] = useState(false);
 
   // Get dashboard data from mock data
   const stats = dashboardStats;
-  const upcomingRenewals = getUpcomingRenewals(30);
-  const overdueRenewals = getOverdueRenewals();
-  const recentInvoices = getRecentInvoices(5);
-  const topClients = getTopClientsByRevenue(5);
   
   // Calculate additional stats
-  const expiringSoon = upcomingRenewals.length;
+  const expiringSoon = 0;
   const activeServices = mockClients.reduce((sum, client) => sum + client.services, 0);
 
   // Filter renewals based on search and filters
-  const filteredRenewals = useMemo(() => {
-    return upcomingRenewals.filter(renewal => {
-      const matchesSearch = renewal.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           renewal.serviceName.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      const matchesClientFilter = clientFilter === 'all-clients' || 
-                                 (clientFilter === 'individual' && renewal.clientName.split(' ').length === 2) ||
-                                 (clientFilter === 'business' && renewal.renewalPrice < 1000) ||
-                                 (clientFilter === 'enterprise' && renewal.renewalPrice >= 1000);
-      
-      const matchesServiceFilter = serviceFilter === 'active-services' || 
-                                  renewal.serviceName.toLowerCase().includes(serviceFilter);
-      
-      const matchesExpiryFilter = expiryFilter === 'expiring-soon' || 
-                                 renewal.status.toLowerCase() === expiryFilter;
-
-      return matchesSearch && matchesClientFilter && matchesServiceFilter && matchesExpiryFilter;
-    });
-  }, [searchTerm, clientFilter, serviceFilter, expiryFilter, upcomingRenewals]);
+  const filteredRenewals = useMemo(() => mockRenewals, []);
 
   const handleAddClient = () => {
-    setShowClientForm(true);
-    // In a real app, this would open a modal or navigate to a form
     console.log('Opening add client form...');
   };
 
@@ -80,7 +48,7 @@ export const Dashboard: React.FC = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Client Overview</h1>
-            <p className="text-gray-600 mt-1 hidden">Manage your clients and track service renewals</p>
+            <p className="text-gray-600 mt-1 ">Manage your clients and track service renewals</p>
           </div>
           <button 
             onClick={handleAddClient}
@@ -113,7 +81,7 @@ export const Dashboard: React.FC = () => {
                 <Package className="h-6 w-6 text-green-600" />
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-1">Active Services</p>
+                <p className="text-sm font-medium text-gray-500 mb-1">Active Projects</p>
                 <p className="text-3xl font-bold text-gray-900">{activeServices}</p>
                 
               </div>

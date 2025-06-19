@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   defaultUserProfile,
   defaultCompanySettings,
@@ -24,17 +24,6 @@ import {
   exportSettings,
   importSettings
 } from '../../data';
-import type {
-  UserProfile,
-  CompanySettings,
-  NotificationSettings,
-  SecuritySettings,
-  InvoiceSettings,
-  ReminderSettings,
-  IntegrationSettings,
-  BackupSettings,
-  ThemeSettings
-} from '../../types';
 import { Upload, Download, RefreshCw, Save, User, Bell, Lock, FileText, Repeat, Zap, Database, Palette, Building2 } from 'lucide-react';
 
 const categories = [
@@ -77,8 +66,9 @@ export const SettingsPage: React.FC = () => {
     setImportError(null);
   }, [selected]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
     setForm((prev: any) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
@@ -221,7 +211,7 @@ export const SettingsPage: React.FC = () => {
 
   const renderNotifications = () => (
     <div className="space-y-4">
-      {Object.entries(defaultNotificationSettings).map(([key, def]) => (
+      {Object.entries(defaultNotificationSettings).map(([key]) => (
         <div key={key} className="flex items-center">
           <input type="checkbox" name={key} checked={!!form[key]} onChange={handleChange} className="h-4 w-4 text-[#096e6e] border-gray-300 rounded" />
           <label className="ml-2 block text-sm text-gray-700">{key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase())}</label>

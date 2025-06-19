@@ -108,7 +108,9 @@ export const mockServices: Service[] = [
     description: "Custom website development with modern technologies",
     basePrice: 999,
     baseDuration: "2-4 weeks",
-    category: "Development"
+    category: "Development",
+    price: 999,
+    duration: "2-4 weeks"
   },
   {
     id: 2,
@@ -116,7 +118,9 @@ export const mockServices: Service[] = [
     description: "Search engine optimization for better rankings",
     basePrice: 499,
     baseDuration: "1-2 weeks",
-    category: "Marketing"
+    category: "Marketing",
+    price: 499,
+    duration: "1-2 weeks"
   },
   {
     id: 3,
@@ -124,7 +128,9 @@ export const mockServices: Service[] = [
     description: "Professional logo design and branding",
     basePrice: 299,
     baseDuration: "1 week",
-    category: "Design"
+    category: "Design",
+    price: 299,
+    duration: "1 week"
   },
   {
     id: 4,
@@ -132,7 +138,9 @@ export const mockServices: Service[] = [
     description: "Monthly social media content and management",
     basePrice: 399,
     baseDuration: "Ongoing",
-    category: "Marketing"
+    category: "Marketing",
+    price: 399,
+    duration: "Ongoing"
   },
   {
     id: 5,
@@ -140,7 +148,9 @@ export const mockServices: Service[] = [
     description: "Cross-platform mobile application development",
     basePrice: 2499,
     baseDuration: "6-8 weeks",
-    category: "Development"
+    category: "Development",
+    price: 2499,
+    duration: "6-8 weeks"
   },
   {
     id: 6,
@@ -148,7 +158,9 @@ export const mockServices: Service[] = [
     description: "Professional content writing for websites and blogs",
     basePrice: 199,
     baseDuration: "3-5 days",
-    category: "Content"
+    category: "Content",
+    price: 199,
+    duration: "3-5 days"
   }
 ];
 
@@ -212,57 +224,101 @@ export const mockProjects: Project[] = [
     id: 1,
     clientId: 1,
     clientName: "Tendai Moyo",
+    serviceId: 1,
+    serviceName: "Website Development",
     name: "E-commerce Website Redesign",
     description: "Complete redesign of the existing e-commerce platform",
     status: "Active",
     startDate: "2024-01-01",
-    budget: 5000,
-    progress: 75
+    endDate: undefined,
+    negotiatedPrice: 4800,
+    negotiatedDuration: "3 weeks",
+    paymentStructure: "One-time",
+    billingFrequency: undefined,
+    totalValue: 5000,
+    progress: 75,
+    notes: "",
+    budget: 5000
   },
   {
     id: 2,
     clientId: 4,
     clientName: "Tatenda Mutasa",
+    serviceId: 5,
+    serviceName: "Mobile App Development",
     name: "Mobile App Development",
     description: "Cross-platform mobile app for startup",
     status: "Active",
     startDate: "2023-12-01",
-    budget: 15000,
-    progress: 60
+    endDate: undefined,
+    negotiatedPrice: 14000,
+    negotiatedDuration: "7 weeks",
+    paymentStructure: "Monthly",
+    billingFrequency: 1,
+    totalValue: 15000,
+    progress: 60,
+    notes: "",
+    budget: 15000
   },
   {
     id: 3,
     clientId: 5,
     clientName: "Chiedza Marufu",
+    serviceId: 3,
+    serviceName: "Logo Design",
     name: "Brand Identity Design",
     description: "Complete brand identity including logo and guidelines",
     status: "Completed",
     startDate: "2023-11-01",
     endDate: "2023-12-15",
-    budget: 3000,
-    progress: 100
+    negotiatedPrice: 2800,
+    negotiatedDuration: "4 weeks",
+    paymentStructure: "One-time",
+    billingFrequency: undefined,
+    totalValue: 3000,
+    progress: 100,
+    notes: "",
+    budget: 3000
   },
   {
     id: 4,
     clientId: 2,
     clientName: "Farai Chikomba",
+    serviceId: 2,
+    serviceName: "SEO Optimization",
     name: "SEO Campaign",
     description: "6-month SEO optimization campaign",
     status: "Active",
     startDate: "2024-01-01",
-    budget: 2000,
-    progress: 25
+    endDate: undefined,
+    negotiatedPrice: 1800,
+    negotiatedDuration: "6 months",
+    paymentStructure: "Monthly",
+    billingFrequency: 1,
+    totalValue: 2000,
+    progress: 25,
+    notes: "",
+    budget: 2000
   },
   {
     id: 5,
     clientId: 8,
     clientName: "Kudzai Mupfumira",
+    serviceId: 4,
+    serviceName: "Social Media Management",
     name: "Website Maintenance",
     description: "Ongoing website maintenance and updates",
     status: "On Hold",
     startDate: "2023-10-01",
-    budget: 1200,
-    progress: 40
+    endDate: undefined,
+    negotiatedPrice: 1000,
+    negotiatedDuration: "Ongoing",
+    paymentStructure: "Monthly",
+    billingFrequency: 1,
+    totalValue: 1200,
+    progress: 40,
+    notes: "",
+    budget: 1200
   }
 ];
 
@@ -330,6 +386,7 @@ export const mockContacts: Contact[] = [
 export const mockRenewals: Renewal[] = [
   {
     id: 1,
+    projectId: 1,
     clientId: 1,
     clientName: "Tendai Moyo",
     serviceId: 1,
@@ -341,10 +398,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Client requested additional features for renewal",
     lastRenewalDate: "2024-07-15",
-    nextRenewalDate: "2026-07-15"
+    nextRenewalDate: "2026-07-15",
+    billingFrequency: 12
   },
   {
     id: 2,
+    projectId: 2,
     clientId: 2,
     clientName: "Farai Chikomba",
     serviceId: 2,
@@ -356,10 +415,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: false,
     notes: "Client considering upgrading to premium package",
     lastRenewalDate: "2024-06-25",
-    nextRenewalDate: "2026-06-25"
+    nextRenewalDate: "2026-06-25",
+    billingFrequency: 12
   },
   {
     id: 3,
+    projectId: 3,
     clientId: 4,
     clientName: "Tatenda Mutasa",
     serviceId: 5,
@@ -371,10 +432,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Payment reminder sent, awaiting response",
     lastRenewalDate: "2024-06-10",
-    nextRenewalDate: "2026-06-10"
+    nextRenewalDate: "2026-06-10",
+    billingFrequency: 12
   },
   {
     id: 4,
+    projectId: 4,
     clientId: 5,
     clientName: "Chiedza Marufu",
     serviceId: 4,
@@ -386,10 +449,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Successfully renewed for another year",
     lastRenewalDate: "2025-06-30",
-    nextRenewalDate: "2026-06-30"
+    nextRenewalDate: "2026-06-30",
+    billingFrequency: 12
   },
   {
     id: 5,
+    projectId: 5,
     clientId: 7,
     clientName: "Rumbidzai Gumbo",
     serviceId: 2,
@@ -401,10 +466,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Standard renewal, no changes requested",
     lastRenewalDate: "2024-07-05",
-    nextRenewalDate: "2026-07-05"
+    nextRenewalDate: "2026-07-05",
+    billingFrequency: 12
   },
   {
     id: 6,
+    projectId: 1,
     clientId: 8,
     clientName: "Kudzai Mupfumira",
     serviceId: 1,
@@ -416,10 +483,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: false,
     notes: "Client decided to discontinue service",
     lastRenewalDate: "2024-06-20",
-    nextRenewalDate: "2025-06-20"
+    nextRenewalDate: "2025-06-20",
+    billingFrequency: 12
   },
   {
     id: 7,
+    projectId: 2,
     clientId: 1,
     clientName: "Tendai Moyo",
     serviceId: 3,
@@ -430,10 +499,12 @@ export const mockRenewals: Renewal[] = [
     status: "Upcoming",
     autoRenew: false,
     notes: "One-time service, no renewal needed",
-    nextRenewalDate: "2025-08-01"
+    nextRenewalDate: "2025-08-01",
+    billingFrequency: 12
   },
   {
     id: 8,
+    projectId: 3,
     clientId: 4,
     clientName: "Tatenda Mutasa",
     serviceId: 4,
@@ -445,10 +516,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Price increase due to expanded service scope",
     lastRenewalDate: "2024-07-20",
-    nextRenewalDate: "2026-07-20"
+    nextRenewalDate: "2026-07-20",
+    billingFrequency: 12
   },
   {
     id: 9,
+    projectId: 4,
     clientId: 2,
     clientName: "Farai Chikomba",
     serviceId: 4,
@@ -460,10 +533,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Standard renewal, client satisfied with current service",
     lastRenewalDate: "2024-07-28",
-    nextRenewalDate: "2026-07-28"
+    nextRenewalDate: "2026-07-28",
+    billingFrequency: 12
   },
   {
     id: 10,
+    projectId: 5,
     clientId: 5,
     clientName: "Chiedza Marufu",
     serviceId: 1,
@@ -475,10 +550,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: false,
     notes: "Client requested website redesign for renewal",
     lastRenewalDate: "2024-08-05",
-    nextRenewalDate: "2026-08-05"
+    nextRenewalDate: "2026-08-05",
+    billingFrequency: 12
   },
   {
     id: 11,
+    projectId: 1,
     clientId: 7,
     clientName: "Rumbidzai Gumbo",
     serviceId: 3,
@@ -490,10 +567,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: false,
     notes: "Logo refresh requested, price increase for additional revisions",
     lastRenewalDate: "2024-08-10",
-    nextRenewalDate: "2026-08-10"
+    nextRenewalDate: "2026-08-10",
+    billingFrequency: 12
   },
   {
     id: 12,
+    projectId: 2,
     clientId: 8,
     clientName: "Kudzai Mupfumira",
     serviceId: 2,
@@ -505,10 +584,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Standard SEO renewal, performance has improved",
     lastRenewalDate: "2024-08-15",
-    nextRenewalDate: "2026-08-15"
+    nextRenewalDate: "2026-08-15",
+    billingFrequency: 12
   },
   {
     id: 13,
+    projectId: 3,
     clientId: 1,
     clientName: "Tendai Moyo",
     serviceId: 5,
@@ -520,10 +601,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "App maintenance and updates renewal",
     lastRenewalDate: "2024-08-20",
-    nextRenewalDate: "2026-08-20"
+    nextRenewalDate: "2026-08-20",
+    billingFrequency: 12
   },
   {
     id: 14,
+    projectId: 4,
     clientId: 3,
     clientName: "Rutendo Ndlovu",
     serviceId: 6,
@@ -535,10 +618,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: false,
     notes: "Monthly content writing service renewal",
     lastRenewalDate: "2024-08-25",
-    nextRenewalDate: "2026-08-25"
+    nextRenewalDate: "2026-08-25",
+    billingFrequency: 12
   },
   {
     id: 15,
+    projectId: 5,
     clientId: 6,
     clientName: "Tafadzwa Sibanda",
     serviceId: 3,
@@ -549,10 +634,12 @@ export const mockRenewals: Renewal[] = [
     status: "Upcoming",
     autoRenew: false,
     notes: "First-time logo design project",
-    nextRenewalDate: "2025-09-01"
+    nextRenewalDate: "2025-09-01",
+    billingFrequency: 12
   },
   {
     id: 16,
+    projectId: 1,
     clientId: 4,
     clientName: "Tatenda Mutasa",
     serviceId: 6,
@@ -564,10 +651,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Content writing service renewal with expanded scope",
     lastRenewalDate: "2024-09-05",
-    nextRenewalDate: "2026-09-05"
+    nextRenewalDate: "2026-09-05",
+    billingFrequency: 12
   },
   {
     id: 17,
+    projectId: 2,
     clientId: 2,
     clientName: "Farai Chikomba",
     serviceId: 1,
@@ -579,10 +668,12 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Website maintenance and hosting renewal",
     lastRenewalDate: "2024-09-10",
-    nextRenewalDate: "2026-09-10"
+    nextRenewalDate: "2026-09-10",
+    billingFrequency: 12
   },
   {
     id: 18,
+    projectId: 3,
     clientId: 5,
     clientName: "Chiedza Marufu",
     serviceId: 5,
@@ -594,7 +685,8 @@ export const mockRenewals: Renewal[] = [
     autoRenew: true,
     notes: "Mobile app hosting and maintenance renewal",
     lastRenewalDate: "2024-09-15",
-    nextRenewalDate: "2026-09-15"
+    nextRenewalDate: "2026-09-15",
+    billingFrequency: 12
   }
 ];
 
