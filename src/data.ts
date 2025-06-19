@@ -1,105 +1,5 @@
 import type { Client, Service, Invoice, Project, Contact, DashboardStats, Renewal, Reminder, RevenueReport, ClientReport, ServiceReport, ProjectReport, RenewalReport, ReminderReport, ChartData, UserProfile, CompanySettings, NotificationSettings, SecuritySettings, InvoiceSettings, ReminderSettings, IntegrationSettings, BackupSettings, ThemeSettings } from './types';
 
-// Mock data for clients
-export const mockClients: Client[] = [
-  {
-    id: 1,
-    name: "Tendai Moyo",
-    email: "tendai@hararetech.co.zw",
-    phone: "+263 77 123 4567",
-    company: "Harare Tech Solutions",
-    type: "Business",
-    status: "Active",
-    services: 3,
-    totalRevenue: 2499,
-    lastContact: "2024-01-15"
-  },
-  {
-    id: 2,
-    name: "Farai Chikomba",
-    email: "farai@bulawayodigital.zw",
-    phone: "+263 71 234 5678",
-    company: "Bulawayo Digital Marketing",
-    type: "Business",
-    status: "Active",
-    services: 2,
-    totalRevenue: 1899,
-    lastContact: "2024-01-10"
-  },
-  {
-    id: 3,
-    name: "Rutendo Ndlovu",
-    email: "rutendo@creativezimbabwe.zw",
-    phone: "+263 78 345 6789",
-    company: "Creative Zimbabwe Studio",
-    type: "Business",
-    status: "Inactive",
-    services: 1,
-    totalRevenue: 899,
-    lastContact: "2023-12-20"
-  },
-  {
-    id: 4,
-    name: "Tatenda Mutasa",
-    email: "tatenda@startupzimbabwe.zw",
-    phone: "+263 73 456 7890",
-    company: "Startup Zimbabwe Ventures",
-    type: "Enterprise",
-    status: "Active",
-    services: 5,
-    totalRevenue: 5499,
-    lastContact: "2024-01-12"
-  },
-  {
-    id: 5,
-    name: "Chiedza Marufu",
-    email: "chiedza@consultingzimbabwe.zw",
-    phone: "+263 77 567 8901",
-    company: "Zimbabwe Consulting Group",
-    type: "Enterprise",
-    status: "Active",
-    services: 4,
-    totalRevenue: 3999,
-    lastContact: "2024-01-08"
-  },
-  {
-    id: 6,
-    name: "Tafadzwa Sibanda",
-    email: "tafadzwa@freelance.zw",
-    phone: "+263 71 678 9012",
-    company: "Freelance Designer Zimbabwe",
-    type: "Individual",
-    status: "Prospect",
-    services: 0,
-    totalRevenue: 0,
-    lastContact: "2024-01-05"
-  },
-  {
-    id: 7,
-    name: "Rumbidzai Gumbo",
-    email: "rumbidzai@marketingzimbabwe.zw",
-    phone: "+263 78 789 0123",
-    company: "Zimbabwe Marketing Agency",
-    type: "Business",
-    status: "Active",
-    services: 2,
-    totalRevenue: 1599,
-    lastContact: "2024-01-14"
-  },
-  {
-    id: 8,
-    name: "Kudzai Mupfumira",
-    email: "kudzai@ecommercezimbabwe.zw",
-    phone: "+263 73 890 1234",
-    company: "Zimbabwe E-commerce Store",
-    type: "Business",
-    status: "Active",
-    services: 3,
-    totalRevenue: 2899,
-    lastContact: "2024-01-11"
-  }
-];
-
 // Mock data for services (what we offer)
 export const mockServices: Service[] = [
   {
@@ -849,24 +749,10 @@ export const mockReminders: Reminder[] = [
   }
 ];
 
-// Dashboard statistics
-export const dashboardStats: DashboardStats = {
-  totalClients: mockClients.length,
-  activeClients: mockClients.filter(client => client.status === 'Active').length,
-  totalRevenue: mockClients.reduce((sum, client) => sum + client.totalRevenue, 0),
-  pendingInvoices: mockInvoices.filter(invoice => invoice.status === 'Pending').length,
-  recentContacts: mockContacts.filter(contact => {
-    const contactDate = new Date(contact.date);
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    return contactDate >= thirtyDaysAgo;
-  }).length
-};
-
 // Helper functions
-export const getClientById = (id: number): Client | undefined => {
-  return mockClients.find(client => client.id === id);
-};
+// export const getClientById = (id: number): Client | undefined => {
+//   return mockClients.find(client => client.id === id);
+// }; // Removed as mockClients is removed
 
 export const getClientInvoices = (clientId: number): Invoice[] => {
   return mockInvoices.filter(invoice => invoice.clientId === clientId);
@@ -958,40 +844,8 @@ export const getHighPriorityReminders = (): Reminder[] => {
 };
 
 // Report data and helper functions
-export const generateRevenueReport = (period: string = '30days'): RevenueReport => {
-  const totalRevenue = mockClients.reduce((sum, client) => sum + client.totalRevenue, 0);
-  const paidInvoices = mockInvoices.filter(invoice => invoice.status === 'Paid');
-  const pendingInvoices = mockInvoices.filter(invoice => invoice.status === 'Pending');
-  const overdueInvoices = mockInvoices.filter(invoice => invoice.status === 'Overdue');
-
-  return {
-    period,
-    totalRevenue,
-    paidRevenue: paidInvoices.reduce((sum, invoice) => sum + invoice.amount, 0),
-    pendingRevenue: pendingInvoices.reduce((sum, invoice) => sum + invoice.amount, 0),
-    overdueRevenue: overdueInvoices.reduce((sum, invoice) => sum + invoice.amount, 0),
-    clientCount: mockClients.length,
-    invoiceCount: mockInvoices.length
-  };
-};
-
-export const generateClientReport = (period: string = '30days'): ClientReport => {
-  const totalClients = mockClients.length;
-  const activeClients = mockClients.filter(client => client.status === 'Active').length;
-  const inactiveClients = mockClients.filter(client => client.status === 'Inactive').length;
-  const prospectClients = mockClients.filter(client => client.status === 'Prospect').length;
-  const totalRevenue = mockClients.reduce((sum, client) => sum + client.totalRevenue, 0);
-
-  return {
-    period,
-    totalClients,
-    newClients: Math.floor(totalClients * 0.2), // Mock calculation
-    activeClients,
-    inactiveClients,
-    prospectClients,
-    averageRevenuePerClient: totalRevenue / totalClients
-  };
-};
+// generateRevenueReport, generateClientReport, generateClientTypeChartData, getTopClientsByRevenue
+// were removed as they depended on mockClients.
 
 export const generateServiceReport = (): ServiceReport[] => {
   return mockServices.map(service => {
@@ -1103,35 +957,7 @@ export const generateRevenueChartData = (): ChartData => {
   };
 };
 
-export const generateClientTypeChartData = (): ChartData => {
-  const clientTypes = ['Individual', 'Business', 'Enterprise'];
-  const typeCounts = [
-    mockClients.filter(client => client.type === 'Individual').length,
-    mockClients.filter(client => client.type === 'Business').length,
-    mockClients.filter(client => client.type === 'Enterprise').length
-  ];
-
-  return {
-    labels: clientTypes,
-    datasets: [
-      {
-        label: 'Client Count',
-        data: typeCounts,
-        backgroundColor: [
-          'rgba(59, 130, 246, 0.8)',
-          'rgba(16, 185, 129, 0.8)',
-          'rgba(168, 85, 247, 0.8)'
-        ],
-        borderColor: [
-          'rgba(59, 130, 246, 1)',
-          'rgba(16, 185, 129, 1)',
-          'rgba(168, 85, 247, 1)'
-        ],
-        borderWidth: 1
-      }
-    ]
-  };
-};
+// Removed generateClientTypeChartData as it depended on mockClients.
 
 export const generateServiceRevenueChartData = (): ChartData => {
   const serviceReport = generateServiceReport();
@@ -1197,11 +1023,7 @@ export const generateProjectStatusChartData = (): ChartData => {
 };
 
 // Helper functions for reports
-export const getTopClientsByRevenue = (limit: number = 5): Client[] => {
-  return [...mockClients]
-    .sort((a, b) => b.totalRevenue - a.totalRevenue)
-    .slice(0, limit);
-};
+// Removed getTopClientsByRevenue as it depended on mockClients.
 
 export const getTopServicesByRevenue = (limit: number = 5): ServiceReport[] => {
   return generateServiceReport()

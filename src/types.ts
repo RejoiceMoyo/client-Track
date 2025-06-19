@@ -1,5 +1,5 @@
 export interface Client {
-  id: number;
+  id: string | number; // Accommodate potential UUIDs from backend
   name: string;
   email: string;
   phone: string;
@@ -9,6 +9,12 @@ export interface Client {
   services: number;
   totalRevenue: number;
   lastContact: string;
+  address?: string;
+  website?: string;
+  industry?: string;
+  notes?: string;
+  tags?: string[];
+  assignedTo?: string; // Example: UUID of user assigned
 }
 
 export type ClientType = 'Individual' | 'Business' | 'Enterprise';
@@ -22,6 +28,12 @@ export interface ClientFormData {
   company: string;
   type: ClientType;
   status: ClientStatus;
+  address?: string;
+  website?: string;
+  industry?: string;
+  notes?: string;
+  tags?: string[];
+  assignedTo?: string;
 }
 
 export interface ClientModalProps {
