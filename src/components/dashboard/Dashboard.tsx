@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { Users, Package, DollarSign, Search, Plus, Eye, Edit, Trash2, AlertTriangle } from 'lucide-react';
-import { 
-  dashboardStats, 
-  mockClients, 
-  mockRenewals
-} from '../../data';
+// import {
+//   mockRenewals // Removed
+//   // dashboardStats, // Removed
+//   // mockClients, // Removed
+// } from '../../data';
 
 export const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,14 +13,14 @@ export const Dashboard: React.FC = () => {
   const [expiryFilter, setExpiryFilter] = useState('expiring-soon');
 
   // Get dashboard data from mock data
-  const stats = dashboardStats;
+  // const stats = dashboardStats; // Removed
   
   // Calculate additional stats
-  const expiringSoon = 0;
-  const activeServices = mockClients.reduce((sum, client) => sum + client.services, 0);
+  const expiringSoon = 0; // This was already a placeholder, can be kept or removed if not used
+  // const activeServices = mockClients.reduce((sum, client) => sum + client.services, 0); // Removed
 
   // Filter renewals based on search and filters
-  const filteredRenewals = useMemo(() => mockRenewals, []);
+  const filteredRenewals = useMemo(() => [], []); // Was mockRenewals, now an empty array
 
   const handleAddClient = () => {
     console.log('Opening add client form...');
@@ -68,7 +68,7 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Total Clients</p>
-                <p className="text-3xl font-bold text-gray-900">{stats.totalClients}</p>
+                <p className="text-3xl font-bold text-gray-900">{/* stats.totalClients */ 'N/A'}</p>
                
               </div>
              
@@ -82,7 +82,7 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Active Projects</p>
-                <p className="text-3xl font-bold text-gray-900">{activeServices}</p>
+                <p className="text-3xl font-bold text-gray-900">{/* activeServices */ 'N/A'}</p>
                 
               </div>
              
@@ -110,7 +110,7 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Revenue YTD</p>
-                <p className="text-3xl font-bold text-gray-900">${stats.totalRevenue.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-gray-900">${/* stats.totalRevenue.toLocaleString() */ 'N/A'}</p>
               
               </div>
              

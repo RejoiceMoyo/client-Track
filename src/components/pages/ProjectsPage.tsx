@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Search, Edit, Trash2, Eye, Calendar, DollarSign, Target, Clock, CheckCircle, XCircle, Pause, Play, User, BarChart3 } from 'lucide-react';
 import type { Project, ProjectFormData, ProjectModalProps } from '../../types';
-import { mockProjects, mockClients } from '../../data';
+// import { mockProjects, mockClients } from '../../data'; // Removed
 import { ConfirmDeleteModal } from '../common/ConfirmDeleteModal';
 import { DetailViewModal, DetailSection, DetailRow, DetailGrid } from '../common/DetailViewModal';
 
@@ -58,20 +58,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project, m
                   
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Client</label>
-                      <select
+                      <label className="block text-sm font-medium text-gray-700">Client ID</label>
+                      <input
+                        type="number"
                         name="clientId"
                         value={formData.clientId}
                         onChange={handleChange}
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#096e6e] focus:border-[#096e6e]"
                         required
-                      >
-                        {mockClients.map(client => (
-                          <option key={client.id} value={client.id}>
-                            {client.name} - {client.company}
-                          </option>
-                        ))}
-                      </select>
+                        placeholder="Enter Client ID"
+                      />
                     </div>
 
                     <div>
@@ -195,7 +191,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project, m
 };
 
 export const ProjectsPage: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>(mockProjects);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [clientFilter, setClientFilter] = useState('all');
@@ -251,48 +247,38 @@ export const ProjectsPage: React.FC = () => {
   };
 
   const handleSubmitProject = (projectData: ProjectFormData) => {
-    const client = mockClients.find(c => c.id === projectData.clientId);
+    // const client = mockClients.find(c => c.id === projectData.clientId); // mockClients removed
+    const clientName = `Client ID: ${projectData.clientId}`; // Placeholder until client fetching is implemented
     
     if (modalMode === 'create') {
       const newProject: Project = {
         ...projectData,
-        id: Math.max(...projects.map(p => p.id)) + 1,
-        clientName: client?.name || '',
-        serviceId: 1, // Assuming a default serviceId
-        negotiatedPrice: 0, // Assuming a default negotiatedPrice
-        negotiatedDuration: '', // Assuming a default negotiatedDuration
-        paymentStructure: 'One-time', // Assuming a default paymentStructure
-        billingFrequency: 1, // Assuming a default billingFrequency
-        totalValue: 0, // Assuming a default totalValue
-        notes: '', // Assuming a default notes
-        status: 'Active', // Assuming a default status
-        startDate: new Date().toISOString().split('T')[0], // Assuming a default startDate
-        endDate: '', // Assuming a default endDate
-        budget: 0, // Assuming a default budget
-        progress: 0, // Assuming a default progress
-        serviceName: 'Default Service' // Assuming a default serviceName
+        id: new Date().getTime(), // Using timestamp for temporary unique ID
+        clientName: clientName,
+        serviceId: projectData.serviceId || 1, // Use from form or default
+        negotiatedPrice: projectData.negotiatedPrice || 0,
+        negotiatedDuration: projectData.negotiatedDuration || '',
+        paymentStructure: projectData.paymentStructure || 'One-time',
+        billingFrequency: projectData.billingFrequency || undefined, // Allow undefined if not applicable
+        totalValue: projectData.totalValue || 0,
+        notes: projectData.notes || '',
+        status: projectData.status || 'Active',
+        startDate: projectData.startDate || new Date().toISOString().split('T')[0],
+        endDate: projectData.endDate || undefined, // Allow undefined
+        budget: projectData.budget || 0,
+        progress: projectData.progress || 0,
+        serviceName: projectData.serviceId ? `Service ID: ${projectData.serviceId}` : 'Default Service' // Placeholder for serviceName
       };
       setProjects([...projects, newProject]);
     } else {
       setProjects(projects.map(project => 
         project.id === selectedProject?.id 
           ? { 
-              ...project, 
-              ...projectData,
-              clientName: client?.name || project.clientName,
-              serviceId: 1, // Assuming a default serviceId
-              negotiatedPrice: 0, // Assuming a default negotiatedPrice
-              negotiatedDuration: '', // Assuming a default negotiatedDuration
-              paymentStructure: 'One-time', // Assuming a default paymentStructure
-              billingFrequency: 1, // Assuming a default billingFrequency
-              totalValue: 0, // Assuming a default totalValue
-              notes: '', // Assuming a default notes
-              status: 'Active', // Assuming a default status
-              startDate: new Date().toISOString().split('T')[0], // Assuming a default startDate
-              endDate: '', // Assuming a default endDate
-              budget: 0, // Assuming a default budget
-              progress: 0, // Assuming a default progress
-              serviceName: 'Default Service' // Assuming a default serviceName
+              ...project, // Spread existing project data first
+              ...projectData, // Then spread form data
+              clientName: clientName, // Update clientName based on new clientId
+              // Ensure other potentially derived fields are handled if necessary
+              serviceName: projectData.serviceId ? `Service ID: ${projectData.serviceId}` : project.serviceName, // Update serviceName
             }
           : project
       ));
@@ -381,7 +367,8 @@ export const ProjectsPage: React.FC = () => {
               <option value="Cancelled">Cancelled</option>
             </select>
 
-            <select 
+            {/* Client Filter Dropdown Removed as mockClients is no longer available */}
+            {/* <select
               value={clientFilter}
               onChange={(e) => setClientFilter(e.target.value)}
               className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#096e6e] focus:border-[#096e6e]"
@@ -392,7 +379,7 @@ export const ProjectsPage: React.FC = () => {
                   {client.name}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
         </div>
       </div>
