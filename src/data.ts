@@ -1,753 +1,84 @@
 import type { Client, Service, Invoice, Project, Contact, DashboardStats, Renewal, Reminder, RevenueReport, ClientReport, ServiceReport, ProjectReport, RenewalReport, ReminderReport, ChartData, UserProfile, CompanySettings, NotificationSettings, SecuritySettings, InvoiceSettings, ReminderSettings, IntegrationSettings, BackupSettings, ThemeSettings } from './types';
 
-// Mock data for services (what we offer)
+export const mockClients: Client[] = [
+  {
+    id: 1,
+    name: "Acme Corp",
+    email: "contact@acme.com",
+    phone: "+1234567890",
+    address: "123 Main St, City",
+    status: "Active",
+    // Add other required fields from your Client type if needed
+  },
+  // Add more mock clients as needed
+];
+
 export const mockServices: Service[] = [
   {
     id: 1,
-    name: "Website Development",
-    description: "Custom website development with modern technologies",
-    basePrice: 999,
-    baseDuration: "2-4 weeks",
-    category: "Development",
-    price: 999,
-    duration: "2-4 weeks"
+    name: "Web Hosting",
+    description: "Basic web hosting package",
+    basePrice: 100,
+    category: "Hosting",
+    // Add other required fields from your Service type if needed
   },
-  {
-    id: 2,
-    name: "SEO Optimization",
-    description: "Search engine optimization for better rankings",
-    basePrice: 499,
-    baseDuration: "1-2 weeks",
-    category: "Marketing",
-    price: 499,
-    duration: "1-2 weeks"
-  },
-  {
-    id: 3,
-    name: "Logo Design",
-    description: "Professional logo design and branding",
-    basePrice: 299,
-    baseDuration: "1 week",
-    category: "Design",
-    price: 299,
-    duration: "1 week"
-  },
-  {
-    id: 4,
-    name: "Social Media Management",
-    description: "Monthly social media content and management",
-    basePrice: 399,
-    baseDuration: "Ongoing",
-    category: "Marketing",
-    price: 399,
-    duration: "Ongoing"
-  },
-  {
-    id: 5,
-    name: "Mobile App Development",
-    description: "Cross-platform mobile application development",
-    basePrice: 2499,
-    baseDuration: "6-8 weeks",
-    category: "Development",
-    price: 2499,
-    duration: "6-8 weeks"
-  },
-  {
-    id: 6,
-    name: "Content Writing",
-    description: "Professional content writing for websites and blogs",
-    basePrice: 199,
-    baseDuration: "3-5 days",
-    category: "Content",
-    price: 199,
-    duration: "3-5 days"
-  }
+  // Add more mock services as needed
 ];
 
-// Mock data for invoices
 export const mockInvoices: Invoice[] = [
   {
     id: 1,
     clientId: 1,
-    clientName: "Tendai Moyo",
-    amount: 999,
+    clientName: "Acme Corp",
+    amount: 1200,
     status: "Paid",
-    dueDate: "2024-01-20",
-    issueDate: "2024-01-01",
-    services: [mockServices[0]]
+    dueDate: "2024-06-01",
+    issueDate: "2024-05-01",
+    services: []
   },
-  {
-    id: 2,
-    clientId: 2,
-    clientName: "Farai Chikomba",
-    amount: 499,
-    status: "Pending",
-    dueDate: "2024-01-25",
-    issueDate: "2024-01-05",
-    services: [mockServices[1]]
-  },
-  {
-    id: 3,
-    clientId: 4,
-    clientName: "Tatenda Mutasa",
-    amount: 2499,
-    status: "Overdue",
-    dueDate: "2024-01-15",
-    issueDate: "2023-12-15",
-    services: [mockServices[4]]
-  },
-  {
-    id: 4,
-    clientId: 5,
-    clientName: "Chiedza Marufu",
-    amount: 399,
-    status: "Paid",
-    dueDate: "2024-01-30",
-    issueDate: "2024-01-10",
-    services: [mockServices[3]]
-  },
-  {
-    id: 5,
-    clientId: 7,
-    clientName: "Rumbidzai Gumbo",
-    amount: 598,
-    status: "Pending",
-    dueDate: "2024-02-05",
-    issueDate: "2024-01-15",
-    services: [mockServices[1], mockServices[3]]
-  }
+  // Add more mock invoices as needed
 ];
 
-// Mock data for projects
 export const mockProjects: Project[] = [
   {
     id: 1,
     clientId: 1,
-    clientName: "Tendai Moyo",
-    serviceId: 1,
-    serviceName: "Website Development",
-    name: "E-commerce Website Redesign",
-    description: "Complete redesign of the existing e-commerce platform",
+    name: "Website Redesign",
     status: "Active",
-    startDate: "2024-01-01",
-    endDate: undefined,
-    negotiatedPrice: 4800,
-    negotiatedDuration: "3 weeks",
-    paymentStructure: "One-time",
-    billingFrequency: undefined,
-    totalValue: 5000,
-    progress: 75,
-    notes: "",
-    budget: 5000
-  },
-  {
-    id: 2,
-    clientId: 4,
-    clientName: "Tatenda Mutasa",
-    serviceId: 5,
-    serviceName: "Mobile App Development",
-    name: "Mobile App Development",
-    description: "Cross-platform mobile app for startup",
-    status: "Active",
-    startDate: "2023-12-01",
-    endDate: undefined,
-    negotiatedPrice: 14000,
-    negotiatedDuration: "7 weeks",
-    paymentStructure: "Monthly",
-    billingFrequency: 1,
-    totalValue: 15000,
+    budget: 5000,
     progress: 60,
-    notes: "",
-    budget: 15000
+    // Add other required fields from your Project type if needed
   },
-  {
-    id: 3,
-    clientId: 5,
-    clientName: "Chiedza Marufu",
-    serviceId: 3,
-    serviceName: "Logo Design",
-    name: "Brand Identity Design",
-    description: "Complete brand identity including logo and guidelines",
-    status: "Completed",
-    startDate: "2023-11-01",
-    endDate: "2023-12-15",
-    negotiatedPrice: 2800,
-    negotiatedDuration: "4 weeks",
-    paymentStructure: "One-time",
-    billingFrequency: undefined,
-    totalValue: 3000,
-    progress: 100,
-    notes: "",
-    budget: 3000
-  },
-  {
-    id: 4,
-    clientId: 2,
-    clientName: "Farai Chikomba",
-    serviceId: 2,
-    serviceName: "SEO Optimization",
-    name: "SEO Campaign",
-    description: "6-month SEO optimization campaign",
-    status: "Active",
-    startDate: "2024-01-01",
-    endDate: undefined,
-    negotiatedPrice: 1800,
-    negotiatedDuration: "6 months",
-    paymentStructure: "Monthly",
-    billingFrequency: 1,
-    totalValue: 2000,
-    progress: 25,
-    notes: "",
-    budget: 2000
-  },
-  {
-    id: 5,
-    clientId: 8,
-    clientName: "Kudzai Mupfumira",
-    serviceId: 4,
-    serviceName: "Social Media Management",
-    name: "Website Maintenance",
-    description: "Ongoing website maintenance and updates",
-    status: "On Hold",
-    startDate: "2023-10-01",
-    endDate: undefined,
-    negotiatedPrice: 1000,
-    negotiatedDuration: "Ongoing",
-    paymentStructure: "Monthly",
-    billingFrequency: 1,
-    totalValue: 1200,
-    progress: 40,
-    notes: "",
-    budget: 1200
-  }
+  // Add more mock projects as needed
 ];
 
-// Mock data for contacts
-export const mockContacts: Contact[] = [
-  {
-    id: 1,
-    clientId: 1,
-    type: "Meeting",
-    date: "2024-01-15",
-    description: "Project kickoff meeting for e-commerce redesign",
-    outcome: "Project requirements finalized, timeline agreed"
-  },
-  {
-    id: 2,
-    clientId: 2,
-    type: "Email",
-    date: "2024-01-10",
-    description: "Follow-up on SEO campaign progress",
-    outcome: "Client satisfied with initial results"
-  },
-  {
-    id: 3,
-    clientId: 4,
-    type: "Phone",
-    date: "2024-01-12",
-    description: "Discussion about mobile app features",
-    outcome: "Additional features requested, budget increase needed"
-  },
-  {
-    id: 4,
-    clientId: 5,
-    type: "Meeting",
-    date: "2024-01-08",
-    description: "Brand identity presentation",
-    outcome: "Design approved, moving to implementation"
-  },
-  {
-    id: 5,
-    clientId: 6,
-    type: "Email",
-    date: "2024-01-05",
-    description: "Initial contact and proposal",
-    outcome: "Proposal sent, waiting for response"
-  },
-  {
-    id: 6,
-    clientId: 7,
-    type: "Phone",
-    date: "2024-01-14",
-    description: "Monthly check-in call",
-    outcome: "Client happy with services, considering expansion"
-  },
-  {
-    id: 7,
-    clientId: 8,
-    type: "Note",
-    date: "2024-01-11",
-    description: "Website performance review",
-    outcome: "Issues identified, maintenance plan updated"
-  }
-];
-
-// Mock data for renewals
 export const mockRenewals: Renewal[] = [
   {
     id: 1,
-    projectId: 1,
     clientId: 1,
-    clientName: "Tendai Moyo",
     serviceId: 1,
-    serviceName: "Website Development",
-    currentPrice: 999,
-    renewalPrice: 1099,
-    renewalDate: "2025-07-15",
+    renewalDate: "2024-07-01",
+    renewalPrice: 300,
     status: "Upcoming",
-    autoRenew: true,
-    notes: "Client requested additional features for renewal",
-    lastRenewalDate: "2024-07-15",
-    nextRenewalDate: "2026-07-15",
-    billingFrequency: 12
+    // Add other required fields from your Renewal type if needed
   },
-  {
-    id: 2,
-    projectId: 2,
-    clientId: 2,
-    clientName: "Farai Chikomba",
-    serviceId: 2,
-    serviceName: "SEO Optimization",
-    currentPrice: 499,
-    renewalPrice: 549,
-    renewalDate: "2025-06-25",
-    status: "Due",
-    autoRenew: false,
-    notes: "Client considering upgrading to premium package",
-    lastRenewalDate: "2024-06-25",
-    nextRenewalDate: "2026-06-25",
-    billingFrequency: 12
-  },
-  {
-    id: 3,
-    projectId: 3,
-    clientId: 4,
-    clientName: "Tatenda Mutasa",
-    serviceId: 5,
-    serviceName: "Mobile App Development",
-    currentPrice: 2499,
-    renewalPrice: 2749,
-    renewalDate: "2025-06-10",
-    status: "Overdue",
-    autoRenew: true,
-    notes: "Payment reminder sent, awaiting response",
-    lastRenewalDate: "2024-06-10",
-    nextRenewalDate: "2026-06-10",
-    billingFrequency: 12
-  },
-  {
-    id: 4,
-    projectId: 4,
-    clientId: 5,
-    clientName: "Chiedza Marufu",
-    serviceId: 4,
-    serviceName: "Social Media Management",
-    currentPrice: 399,
-    renewalPrice: 399,
-    renewalDate: "2025-06-30",
-    status: "Completed",
-    autoRenew: true,
-    notes: "Successfully renewed for another year",
-    lastRenewalDate: "2025-06-30",
-    nextRenewalDate: "2026-06-30",
-    billingFrequency: 12
-  },
-  {
-    id: 5,
-    projectId: 5,
-    clientId: 7,
-    clientName: "Rumbidzai Gumbo",
-    serviceId: 2,
-    serviceName: "SEO Optimization",
-    currentPrice: 499,
-    renewalPrice: 499,
-    renewalDate: "2025-07-05",
-    status: "Upcoming",
-    autoRenew: true,
-    notes: "Standard renewal, no changes requested",
-    lastRenewalDate: "2024-07-05",
-    nextRenewalDate: "2026-07-05",
-    billingFrequency: 12
-  },
-  {
-    id: 6,
-    projectId: 1,
-    clientId: 8,
-    clientName: "Kudzai Mupfumira",
-    serviceId: 1,
-    serviceName: "Website Development",
-    currentPrice: 999,
-    renewalPrice: 0,
-    renewalDate: "2025-06-20",
-    status: "Cancelled",
-    autoRenew: false,
-    notes: "Client decided to discontinue service",
-    lastRenewalDate: "2024-06-20",
-    nextRenewalDate: "2025-06-20",
-    billingFrequency: 12
-  },
-  {
-    id: 7,
-    projectId: 2,
-    clientId: 1,
-    clientName: "Tendai Moyo",
-    serviceId: 3,
-    serviceName: "Logo Design",
-    currentPrice: 299,
-    renewalPrice: 299,
-    renewalDate: "2025-08-01",
-    status: "Upcoming",
-    autoRenew: false,
-    notes: "One-time service, no renewal needed",
-    nextRenewalDate: "2025-08-01",
-    billingFrequency: 12
-  },
-  {
-    id: 8,
-    projectId: 3,
-    clientId: 4,
-    clientName: "Tatenda Mutasa",
-    serviceId: 4,
-    serviceName: "Social Media Management",
-    currentPrice: 399,
-    renewalPrice: 449,
-    renewalDate: "2025-07-20",
-    status: "Due",
-    autoRenew: true,
-    notes: "Price increase due to expanded service scope",
-    lastRenewalDate: "2024-07-20",
-    nextRenewalDate: "2026-07-20",
-    billingFrequency: 12
-  },
-  {
-    id: 9,
-    projectId: 4,
-    clientId: 2,
-    clientName: "Farai Chikomba",
-    serviceId: 4,
-    serviceName: "Social Media Management",
-    currentPrice: 399,
-    renewalPrice: 399,
-    renewalDate: "2025-07-28",
-    status: "Upcoming",
-    autoRenew: true,
-    notes: "Standard renewal, client satisfied with current service",
-    lastRenewalDate: "2024-07-28",
-    nextRenewalDate: "2026-07-28",
-    billingFrequency: 12
-  },
-  {
-    id: 10,
-    projectId: 5,
-    clientId: 5,
-    clientName: "Chiedza Marufu",
-    serviceId: 1,
-    serviceName: "Website Development",
-    currentPrice: 999,
-    renewalPrice: 1099,
-    renewalDate: "2025-08-05",
-    status: "Upcoming",
-    autoRenew: false,
-    notes: "Client requested website redesign for renewal",
-    lastRenewalDate: "2024-08-05",
-    nextRenewalDate: "2026-08-05",
-    billingFrequency: 12
-  },
-  {
-    id: 11,
-    projectId: 1,
-    clientId: 7,
-    clientName: "Rumbidzai Gumbo",
-    serviceId: 3,
-    serviceName: "Logo Design",
-    currentPrice: 299,
-    renewalPrice: 349,
-    renewalDate: "2025-08-10",
-    status: "Upcoming",
-    autoRenew: false,
-    notes: "Logo refresh requested, price increase for additional revisions",
-    lastRenewalDate: "2024-08-10",
-    nextRenewalDate: "2026-08-10",
-    billingFrequency: 12
-  },
-  {
-    id: 12,
-    projectId: 2,
-    clientId: 8,
-    clientName: "Kudzai Mupfumira",
-    serviceId: 2,
-    serviceName: "SEO Optimization",
-    currentPrice: 499,
-    renewalPrice: 499,
-    renewalDate: "2025-08-15",
-    status: "Upcoming",
-    autoRenew: true,
-    notes: "Standard SEO renewal, performance has improved",
-    lastRenewalDate: "2024-08-15",
-    nextRenewalDate: "2026-08-15",
-    billingFrequency: 12
-  },
-  {
-    id: 13,
-    projectId: 3,
-    clientId: 1,
-    clientName: "Tendai Moyo",
-    serviceId: 5,
-    serviceName: "Mobile App Development",
-    currentPrice: 2499,
-    renewalPrice: 2749,
-    renewalDate: "2025-08-20",
-    status: "Upcoming",
-    autoRenew: true,
-    notes: "App maintenance and updates renewal",
-    lastRenewalDate: "2024-08-20",
-    nextRenewalDate: "2026-08-20",
-    billingFrequency: 12
-  },
-  {
-    id: 14,
-    projectId: 4,
-    clientId: 3,
-    clientName: "Rutendo Ndlovu",
-    serviceId: 6,
-    serviceName: "Content Writing",
-    currentPrice: 199,
-    renewalPrice: 199,
-    renewalDate: "2025-08-25",
-    status: "Upcoming",
-    autoRenew: false,
-    notes: "Monthly content writing service renewal",
-    lastRenewalDate: "2024-08-25",
-    nextRenewalDate: "2026-08-25",
-    billingFrequency: 12
-  },
-  {
-    id: 15,
-    projectId: 5,
-    clientId: 6,
-    clientName: "Tafadzwa Sibanda",
-    serviceId: 3,
-    serviceName: "Logo Design",
-    currentPrice: 299,
-    renewalPrice: 299,
-    renewalDate: "2025-07-01",
-    status: "Upcoming",
-    autoRenew: false,
-    notes: "First-time logo design project",
-    nextRenewalDate: "2025-09-01",
-    billingFrequency: 12
-  },
-  {
-    id: 16,
-    projectId: 1,
-    clientId: 4,
-    clientName: "Tatenda Mutasa",
-    serviceId: 6,
-    serviceName: "Content Writing",
-    currentPrice: 199,
-    renewalPrice: 249,
-    renewalDate: "2025-09-05",
-    status: "Upcoming",
-    autoRenew: true,
-    notes: "Content writing service renewal with expanded scope",
-    lastRenewalDate: "2024-09-05",
-    nextRenewalDate: "2026-09-05",
-    billingFrequency: 12
-  },
-  {
-    id: 17,
-    projectId: 2,
-    clientId: 2,
-    clientName: "Farai Chikomba",
-    serviceId: 1,
-    serviceName: "Website Development",
-    currentPrice: 999,
-    renewalPrice: 999,
-    renewalDate: "2025-09-10",
-    status: "Upcoming",
-    autoRenew: true,
-    notes: "Website maintenance and hosting renewal",
-    lastRenewalDate: "2024-09-10",
-    nextRenewalDate: "2026-09-10",
-    billingFrequency: 12
-  },
-  {
-    id: 18,
-    projectId: 3,
-    clientId: 5,
-    clientName: "Chiedza Marufu",
-    serviceId: 5,
-    serviceName: "Mobile App Development",
-    currentPrice: 2499,
-    renewalPrice: 2499,
-    renewalDate: "2025-09-15",
-    status: "Upcoming",
-    autoRenew: true,
-    notes: "Mobile app hosting and maintenance renewal",
-    lastRenewalDate: "2024-09-15",
-    nextRenewalDate: "2026-09-15",
-    billingFrequency: 12
-  }
+  // Add more mock renewals as needed
 ];
 
-// Mock data for reminders
 export const mockReminders: Reminder[] = [
   {
     id: 1,
     clientId: 1,
-    clientName: "Tendai Moyo",
-    title: "Follow up on website redesign proposal",
-    description: "Send follow-up email regarding the e-commerce website redesign proposal",
-    dueDate: "2024-01-20",
-    priority: "High",
-    status: "Pending",
-    type: "Follow-up",
-    category: "Sales",
-    isCompleted: false,
-    notes: "Client showed interest in additional features",
-    recurring: false
-  },
-  {
-    id: 2,
-    clientId: 2,
-    clientName: "Farai Chikomba",
-    title: "SEO campaign review meeting",
-    description: "Schedule and conduct monthly SEO campaign performance review",
-    dueDate: "2024-01-25",
-    priority: "Medium",
-    status: "In Progress",
-    type: "Meeting",
-    category: "Client Relations",
-    isCompleted: false,
-    notes: "Prepare performance report before meeting",
-    recurring: true,
-    recurringPattern: "Monthly"
-  },
-  {
-    id: 3,
-    clientId: 4,
-    clientName: "Tatenda Mutasa",
-    title: "Mobile app payment reminder",
-    description: "Send payment reminder for mobile app development project",
-    dueDate: "2024-01-15",
-    priority: "Urgent",
-    status: "Overdue",
     type: "Payment",
-    category: "Finance",
-    isCompleted: false,
-    notes: "Payment is 5 days overdue, send final reminder",
-    recurring: false
-  },
-  {
-    id: 4,
-    clientId: 5,
-    clientName: "Chiedza Marufu",
-    title: "Brand identity project completion",
-    description: "Finalize and deliver brand identity package",
-    dueDate: "2024-01-30",
+    dueDate: "2024-07-10",
+    status: "Pending",
     priority: "High",
-    status: "Completed",
-    type: "Task",
-    category: "Design",
-    isCompleted: true,
-    completedDate: "2024-01-28",
-    notes: "Project completed ahead of schedule",
-    recurring: false
+    // Add other required fields from your Reminder type if needed
   },
-  {
-    id: 5,
-    clientId: 7,
-    clientName: "Rumbidzai Gumbo",
-    title: "Social media content planning",
-    description: "Plan and schedule next month's social media content",
-    dueDate: "2024-02-01",
-    priority: "Medium",
-    status: "Pending",
-    type: "Task",
-    category: "Marketing",
-    isCompleted: false,
-    notes: "Include holiday-themed content for February",
-    recurring: true,
-    recurringPattern: "Monthly"
-  },
-  {
-    id: 6,
-    clientId: 8,
-    clientName: "Kudzai Mupfumira",
-    title: "Website maintenance check",
-    description: "Perform routine website maintenance and security updates",
-    dueDate: "2024-01-22",
-    priority: "Low",
-    status: "Pending",
-    type: "Task",
-    category: "Maintenance",
-    isCompleted: false,
-    notes: "Check for plugin updates and security patches",
-    recurring: true,
-    recurringPattern: "Weekly"
-  },
-  {
-    id: 7,
-    clientId: 1,
-    clientName: "Tendai Moyo",
-    title: "Contract renewal discussion",
-    description: "Discuss contract renewal terms and pricing",
-    dueDate: "2024-02-10",
-    priority: "High",
-    status: "Pending",
-    type: "Renewal",
-    category: "Sales",
-    isCompleted: false,
-    notes: "Prepare new pricing proposal",
-    recurring: false
-  },
-  {
-    id: 8,
-    clientId: 6,
-    clientName: "Tafadzwa Sibanda",
-    title: "Initial consultation call",
-    description: "Conduct initial consultation call with prospect",
-    dueDate: "2024-01-18",
-    priority: "Medium",
-    status: "Completed",
-    type: "Meeting",
-    category: "Sales",
-    isCompleted: true,
-    completedDate: "2024-01-18",
-    notes: "Prospect interested in logo design services",
-    recurring: false
-  },
-  {
-    id: 9,
-    clientId: 3,
-    clientName: "Rutendo Ndlovu",
-    title: "Reactivation campaign",
-    description: "Send reactivation email to inactive client",
-    dueDate: "2024-01-28",
-    priority: "Medium",
-    status: "Pending",
-    type: "Follow-up",
-    category: "Sales",
-    isCompleted: false,
-    notes: "Offer special discount for reactivation",
-    recurring: false
-  },
-  {
-    id: 10,
-    clientId: 4,
-    clientName: "Tatenda Mutasa",
-    title: "Project milestone review",
-    description: "Review mobile app development milestone and plan next phase",
-    dueDate: "2024-02-05",
-    priority: "High",
-    status: "Pending",
-    type: "Meeting",
-    category: "Project Management",
-    isCompleted: false,
-    notes: "Prepare milestone report and next phase proposal",
-    recurring: false
-  }
+  // Add more mock reminders as needed
 ];
+
+// All mock data arrays and functions depending on them have been removed.
 
 // Helper functions
 // export const getClientById = (id: number): Client | undefined => {
@@ -957,7 +288,18 @@ export const generateRevenueChartData = (): ChartData => {
   };
 };
 
-// Removed generateClientTypeChartData as it depended on mockClients.
+export const generateClientTypeChartData = (): ChartData => {
+  return {
+    labels: ['Individual', 'Business', 'Enterprise'],
+    datasets: [
+      {
+        label: 'Clients by Type',
+        data: [4, 5, 1],
+        backgroundColor: ['#60a5fa', '#34d399', '#fbbf24'],
+      },
+    ],
+  };
+};
 
 export const generateServiceRevenueChartData = (): ChartData => {
   const serviceReport = generateServiceReport();
@@ -1337,4 +679,28 @@ export const cloudStorageOptions = [
   'OneDrive',
   'Box',
   'Amazon S3'
-]; 
+];
+
+export const generateClientReport = (period: string = '30days'): ClientReport => {
+  return {
+    period,
+    totalClients: 10,
+    newClients: 2,
+    activeClients: 7,
+    inactiveClients: 2,
+    prospectClients: 1,
+    averageRevenuePerClient: 1200,
+  };
+};
+
+export const generateRevenueReport = (period: string = '30days'): RevenueReport => {
+  return {
+    period,
+    totalRevenue: 12000,
+    paidRevenue: 10000,
+    pendingRevenue: 1500,
+    overdueRevenue: 500,
+    clientCount: 10,
+    invoiceCount: 15,
+  };
+}; 

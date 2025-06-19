@@ -32,17 +32,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLoading(true);
     try {
       console.log('Attempting login with:', credentials.email);
-      // Simulate API call - replace with actual API endpoint
-      const response = await mockLoginAPI(credentials);
-      
-      if (response.success && response.user) {
-        setUser(response.user);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        localStorage.setItem('token', response.token || '');
-        console.log('Login successful:', response.user);
-      } else {
-        throw new Error(response.message || 'Login failed');
-      }
+      // TODO: Replace with actual API call
+      throw new Error('Login API not implemented.');
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -79,50 +70,4 @@ export const useAuth = (): AuthContextType => {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
-};
-
-// Mock API function - replace with actual API calls
-const mockLoginAPI = async (credentials: LoginCredentials): Promise<{
-  success: boolean;
-  user?: User;
-  token?: string;
-  message?: string;
-}> => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
-  // Mock users for demonstration
-  const mockUsers: User[] = [
-    {
-      id: '1',
-      email: 'admin@company.com',
-      name: 'Admin User',
-      role: 'admin',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-    {
-      id: '2',
-      email: 'user@company.com',
-      name: 'Regular User',
-      role: 'user',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  ];
-
-  const user = mockUsers.find(u => u.email === credentials.email);
-  
-  if (user && credentials.password === 'password') {
-    return {
-      success: true,
-      user,
-      token: 'mock-jwt-token',
-    };
-  }
-
-  return {
-    success: false,
-    message: 'Invalid email or password',
-  };
 }; 

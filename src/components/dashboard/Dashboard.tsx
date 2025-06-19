@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { Users, Package, DollarSign, Search, Plus, Eye, Edit, Trash2, AlertTriangle } from 'lucide-react';
 import { 
-  dashboardStats, 
-  mockClients, 
-  mockRenewals
+  mockRenewals,
+  mockProjects,
+  mockInvoices
 } from '../../data';
 
 export const Dashboard: React.FC = () => {
@@ -12,12 +12,11 @@ export const Dashboard: React.FC = () => {
   const [serviceFilter, setServiceFilter] = useState('active-services');
   const [expiryFilter, setExpiryFilter] = useState('expiring-soon');
 
-  // Get dashboard data from mock data
-  const stats = dashboardStats;
-  
-  // Calculate additional stats
-  const expiringSoon = 0;
-  const activeServices = mockClients.reduce((sum, client) => sum + client.services, 0);
+  // Calculate dashboard stats
+  const totalClients = Array.from(new Set(mockProjects.map(p => p.clientId))).length;
+  const totalRevenue = mockInvoices.reduce((sum, invoice) => sum + invoice.amount, 0);
+  const activeServices = mockProjects.filter(project => project.status === 'Active').length;
+  const expiringSoon = mockRenewals.filter(r => r.status === 'Upcoming' || r.status === 'Due').length;
 
   // Filter renewals based on search and filters
   const filteredRenewals = useMemo(() => mockRenewals, []);
@@ -68,10 +67,8 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Total Clients</p>
-                <p className="text-3xl font-bold text-gray-900">{stats.totalClients}</p>
-               
+                <p className="text-3xl font-bold text-gray-900">{totalClients}</p>
               </div>
-             
             </div>
           </div>
 
@@ -83,9 +80,7 @@ export const Dashboard: React.FC = () => {
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Active Projects</p>
                 <p className="text-3xl font-bold text-gray-900">{activeServices}</p>
-                
               </div>
-             
             </div>
           </div>
 
@@ -97,9 +92,7 @@ export const Dashboard: React.FC = () => {
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Expiring Soon</p>
                 <p className="text-3xl font-bold text-gray-900">{expiringSoon}</p>
-               
               </div>
-             
             </div>
           </div>
 
@@ -110,10 +103,8 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500 mb-1">Revenue YTD</p>
-                <p className="text-3xl font-bold text-gray-900">${stats.totalRevenue.toLocaleString()}</p>
-              
+                <p className="text-3xl font-bold text-gray-900">${totalRevenue.toLocaleString()}</p>
               </div>
-             
             </div>
           </div>
         </div>
