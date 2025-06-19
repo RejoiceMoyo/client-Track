@@ -1,11 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { Users, Package, DollarSign, Search, Plus, Eye, Edit, Trash2, AlertTriangle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [clientFilter, setClientFilter] = useState('all-clients');
   const [serviceFilter, setServiceFilter] = useState('active-services');
   const [expiryFilter, setExpiryFilter] = useState('expiring-soon');
+
+  const navigate = useNavigate();
 
   // Placeholders for dashboard stats (replace with real data fetching logic)
   const totalClients = 0;
@@ -17,7 +20,8 @@ export const Dashboard: React.FC = () => {
   // const filteredRenewals = useMemo(() => [], []);
 
   const handleAddClient = () => {
-    console.log('Opening add client form...');
+    // Navigate to /clients and open the add client modal
+    navigate('/clients', { state: { openAddClientModal: true } });
   };
 
   const handleViewClient = (clientId: number) => {

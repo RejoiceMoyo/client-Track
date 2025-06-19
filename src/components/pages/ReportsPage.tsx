@@ -23,7 +23,6 @@ import {
   // generateProjectReport, // Removed
   // generateRenewalReport,
   // generateReminderReport,
-  generateRevenueChartData,
   generateClientTypeChartData,
   generateServiceRevenueChartData,
   // generateProjectStatusChartData, // Removed
@@ -206,7 +205,7 @@ export const ReportsPage: React.FC = () => {
   // const reminderReport = useMemo(() => generateReminderReport(dateRange), [dateRange]);
 
   // Generate chart data
-  const revenueChartData = useMemo(() => generateRevenueChartData(), []);
+  const revenueChartData = useMemo(() => ({ labels: [], datasets: [{ label: 'Revenue', data: [] }] }), []);
   const clientTypeChartData = useMemo(() => generateClientTypeChartData(), []);
   const serviceRevenueChartData = useMemo(() => generateServiceRevenueChartData(), []);
   // const projectStatusChartData = useMemo(() => generateProjectStatusChartData(), []); // Removed

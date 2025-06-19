@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Search, Edit, Trash2, Eye, Calendar, Clock, AlertTriangle, CheckCircle, XCircle, Bell, Flag, User } from 'lucide-react';
 import type { Reminder, ReminderFormData, ReminderModalProps } from '../../types';
-import { mockReminders, mockClients } from '../../data';
 import { ConfirmDeleteModal } from '../common/ConfirmDeleteModal';
 import { DetailViewModal, DetailSection, DetailRow, DetailGrid } from '../common/DetailViewModal';
 
@@ -63,7 +62,7 @@ const ReminderModal: React.FC<ReminderModalProps> = ({ isOpen, onClose, reminder
                         className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#096e6e] focus:border-[#096e6e]"
                         required
                       >
-                        {mockClients.map(client => (
+                        {[] /* mockClients removed */.map(client => (
                           <option key={client.id} value={client.id}>
                             {client.name} - {client.company}
                           </option>
@@ -254,7 +253,7 @@ const ReminderModal: React.FC<ReminderModalProps> = ({ isOpen, onClose, reminder
 };
 
 export const RemindersPage: React.FC = () => {
-  const [reminders, setReminders] = useState<Reminder[]>(mockReminders);
+  const [reminders, setReminders] = useState<Reminder[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [priorityFilter, setPriorityFilter] = useState('all');
@@ -313,7 +312,7 @@ export const RemindersPage: React.FC = () => {
   };
 
   const handleSubmitReminder = (reminderData: ReminderFormData) => {
-    const client = mockClients.find(c => c.id === reminderData.clientId);
+    const client = undefined; // mockClients removed
     
     if (modalMode === 'create') {
       const newReminder: Reminder = {

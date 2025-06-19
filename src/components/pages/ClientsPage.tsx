@@ -6,32 +6,37 @@ import type { Client, ClientFormData, ClientModalProps } from '../../types';
 // import { mockClients } from '../../data'; // No longer needed as initial state is empty
 import { ConfirmDeleteModal } from '../common/ConfirmDeleteModal';
 import { DetailViewModal, DetailSection, DetailRow, DetailGrid } from '../common/DetailViewModal';
+import { useLocation } from 'react-router-dom';
 
 // Client Modal Component
 const ClientModal: React.FC<ClientModalProps> = ({ isOpen, onClose, client, mode, onSubmit }) => {
-  const [formData, setFormData] = useState<ClientFormData>({
-    name: client?.name || '',
-    email: client?.email || '',
-    phone: client?.phone || '',
-    company: client?.company || '',
-    type: client?.type || 'Individual',
-    status: client?.status || 'Active',
-    address: client?.address || '',
-    website: client?.website || '',
-    industry: client?.industry || '',
-    notes: client?.notes || '',
-    tags: client?.tags?.join(', ') || '', // Join tags array into a comma-separated string for input
-    assignedTo: client?.assignedTo || '',
-  });
+  // Use a local string for tags input, but keep the rest as ClientFormData
+  const [formData, setFormData] = useState<Omit<ClientFormData, 'tags'> & { tags: string }>(
+    {
+      name: client?.name || '',
+      email: client?.email || '',
+      phone: client?.phone || '',
+      company: client?.company || '',
+      type: client?.type || 'Individual',
+      status: client?.status || 'Active',
+      address: client?.address || '',
+      website: client?.website || '',
+      industry: client?.industry || '',
+      notes: client?.notes || '',
+      tags: client?.tags ? (client.tags as string[]).join(', ') : '', // always a string for the input
+      assignedTo: client?.assignedTo || '',
+    } as Omit<ClientFormData, 'tags'> & { tags: string }
+  );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Prepare data for submission, potentially parsing tags string back to array if needed by onSubmit
+    // Convert tags string to array for submission
+    const tagsString: string = formData.tags;
     const dataToSubmit: ClientFormData = {
-        ...formData,
-        // If your onSubmit expects tags as an array, parse it here.
-        // Otherwise, it's handled in the parent component's handleSubmitClient.
-        // tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()) : [],
+      ...formData,
+      tags: tagsString
+        ? tagsString.split(',').map((tag: string) => tag.trim()).filter((tag: string) => tag !== '')
+        : [],
     };
     onSubmit(dataToSubmit);
     onClose();
@@ -247,6 +252,7 @@ export const ClientsPage: React.FC = () => {
   const [clientToDelete, setClientToDelete] = useState<Client | undefined>(undefined);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [clientToView, setClientToView] = useState<Client | undefined>(undefined);
+  const location = useLocation();
 
   // Filter clients based on search and filters
   const filteredClients = useMemo(() => {
@@ -407,6 +413,14 @@ export const ClientsPage: React.FC = () => {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
+
+  React.useEffect(() => {
+    if (location.state && location.state.openAddClientModal) {
+      setModalMode('create');
+      setSelectedClient(undefined);
+      setIsModalOpen(true);
+    }
+  }, [location.state]);
 
   return (
     <div className="space-y-6 p-4 md:p-6">
